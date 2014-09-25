@@ -1,0 +1,28 @@
+commit 8399c2d83746075c28e4aa163bc5ab023d725546
+Author: Pete Zaitcev <zaitcev@kotori.zaitcev.us>
+Date:   Wed Sep 10 18:52:48 2014 -0600
+
+    oslo.sphinx
+
+diff --git a/doc/source/conf.py b/doc/source/conf.py
+index ed14d26..4b0fd70 100644
+--- a/doc/source/conf.py
++++ b/doc/source/conf.py
+@@ -35,7 +35,7 @@ extensions = ['sphinx.ext.autodoc',
+               'sphinx.ext.pngmath',
+               'sphinx.ext.ifconfig',
+               'sphinx.ext.graphviz',
+-              'oslosphinx',
++              'oslo.sphinx',
+               ]
+ 
+ # autodoc generation is a bit aggressive and a nuisance
+@@ -140,7 +140,7 @@ man_pages = [
+ # Theme options are theme-specific and customize the look and feel of a theme
+ # further.  For a list of options available for each theme, see the
+ # documentation.
+-html_theme_options = {'incubating': True}
++#html_theme_options = {'incubating': True}
+ 
+ # Add any paths that contain custom themes here, relative to this directory.
+ #html_theme_path = []
