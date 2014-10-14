@@ -1,17 +1,21 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
 
+%global milestone rc2
+%global upstream_name manila
+
 Name:             openstack-manila
 Version:          2014.2
-Release:          0.2%{?dist}
+Release:          0.3%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
-Group:            Applications/System
 License:          ASL 2.0
-# We're only incubated, so we're not on openstack.org.
-# URL:              http://www.openstack.org/software/openstack-filesystem/
-URL:              http://github.com/stackforge/manila
-#Source0:          https://launchpad.net/manila/icehouse/2014.2/+download/manila-%{version}.tar.gz
-Source0:          manila-2014.2.dev32.g5d54abf.tar.gz
+URL:              https://wiki.openstack.org/wiki/Manila
+#Source0:          https://launchpad.net/manila/juno/2014.2/+download/manila-%{version}.tar.gz
+# No tarball provided by upstream
+# Retrieved from https://github.com/openstack/manila/archive/%{version}.%{milestone}.tar.gz
+# Renamed to %{upstream_name}-%{version}.%{milestone}.tar.gz
+# as github can't generate proper tarballs
+Source0:          %{upstream_name}-%{version}.%{milestone}.tar.gz
 Source1:          manila.conf
 Source2:          manila.logrotate
 Source3:          manila-dist.conf
@@ -23,12 +27,11 @@ Source12:         openstack-manila-share.service
 
 Source20:         manila-sudoers
 
-Patch01:          manila-2014.2-oslosphinx.patch
-
 #
-# patches_base=2013.2
+# patches_base=2014.2
 #
-#Patch0001: 0001-Ensure-we-don-t-access-the-net-when-building-docs.patch
+Patch0001:        0001-oslo.sphinx-patch.patch
+Patch0002:        0002-Remove-runtime-dep-on-pbr.patch
 
 BuildArch:        noarch
 # XXX Although intltool pulls gettext, we still traceback with undeclared '_'
@@ -38,6 +41,7 @@ BuildRequires:    python-oslo-sphinx
 BuildRequires:    python-pbr
 BuildRequires:    python-setuptools
 BuildRequires:    python-sphinx
+BuildRequires:    python2-devel
 
 Requires:         openstack-utils
 Requires:         python-manila = %{version}-%{release}
@@ -158,11 +162,7 @@ This package contains the associated documentation.
 %endif
 
 %prep
-#setup -q -n manila-%{version}
-%setup -q -n manila-2014.2.dev32.g5d54abf
-
-%patch01 -p1
-#patch0001 -p1
+%autosetup -n %{upstream_name}-%{version}.%{milestone} -S git
 
 find . \( -name .gitignore -o -name .placeholder \) -delete
 
@@ -172,15 +172,15 @@ find manila -name \*.py -exec sed -i '/\/usr\/bin\/env python/{d;q}' {} +
 # to distutils requires_dist config
 rm -rf {test-,}requirements.txt tools/{pip,test}-requires
 
-# We add REDHATCINDERVERSION/RELEASE with the pbr removal patch
-sed -i s/REDHATCINDERVERSION/%{version}/ manila/version.py
-sed -i s/REDHATCINDERRELEASE/%{release}/ manila/version.py
+# We add REDHATMANILAVERSION/RELEASE with the pbr removal patch
+sed -i s/REDHATMANILAVERSION/%{version}/ manila/version.py
+sed -i s/REDHATMANILARELEASE/%{release}/ manila/version.py
 
 %build
-%{__python} setup.py build
+%{__python2} setup.py build
 
 %install
-%{__python} setup.py install -O1 --skip-build --root %{buildroot}
+%{__python2} setup.py install -O1 --skip-build --root %{buildroot}
 
 # docs generation requires everything to be installed first
 export PYTHONPATH="$( pwd ):$PYTHONPATH"
@@ -322,6 +322,9 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
+* Tue Oct 14 2014 Haïkel Guémar <hguemar@fedoraproject.org> - 2014.2-0.3
+- Upstream 2014.2.rc2
+
 * Wed Sep 10 2014 Pete Zaitcev <zaitcev@redhat.com>
 - 2014.2-0.2
 - Address review comments bz#1125033 comment#2
