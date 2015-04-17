@@ -5,7 +5,7 @@
 
 Name:             openstack-manila
 Version:          2015.1
-Release:          0.1.rc1%{?dist}
+Release:          0.2.rc1%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
@@ -317,6 +317,9 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
+* Fri Apr 29 2015 Martin Mágr <mmagr@redhat.com> - 2015.1-0.2.rc1
+- Modified logrotate file so that log files won't grow too big (bz#1212485)
+
 * Wed Apr 22 2015 Pete Zaitcev <zaitcev@redhat.com> - 2015.1-0.1.rc1
 - Update to upstream 2015.1.0rc1
 - Use the OpenStack tarballs repository instead of raw Github
