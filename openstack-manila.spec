@@ -1,21 +1,16 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
 
-%global milestone rc2
+%global milestone 0rc1
 %global upstream_name manila
 
 Name:             openstack-manila
-Version:          2014.2
-Release:          0.3%{?dist}
+Version:          2015.1
+Release:          0.1.rc1%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
 URL:              https://wiki.openstack.org/wiki/Manila
-#Source0:          https://launchpad.net/manila/juno/2014.2/+download/manila-%{version}.tar.gz
-# No tarball provided by upstream
-# Retrieved from https://github.com/openstack/manila/archive/%{version}.%{milestone}.tar.gz
-# Renamed to %{upstream_name}-%{version}.%{milestone}.tar.gz
-# as github can't generate proper tarballs
-Source0:          %{upstream_name}-%{version}.%{milestone}.tar.gz
+Source0:          http://tarballs.openstack.org/manila/%{upstream_name}-%{version}.%{milestone}.tar.gz
 Source1:          manila.conf
 Source2:          manila.logrotate
 Source3:          manila-dist.conf
@@ -28,7 +23,7 @@ Source12:         openstack-manila-share.service
 Source20:         manila-sudoers
 
 #
-# patches_base=2014.2
+# patches_base=2015.1
 #
 Patch0001:        0001-oslo.sphinx-patch.patch
 Patch0002:        0002-Remove-runtime-dep-on-pbr.patch
@@ -322,6 +317,10 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
+* Wed Apr 22 2015 Pete Zaitcev <zaitcev@redhat.com> - 2015.1-0.1.rc1
+- Update to upstream 2015.1.0rc1
+- Use the OpenStack tarballs repository instead of raw Github
+
 * Tue Oct 14 2014 Haïkel Guémar <hguemar@fedoraproject.org> - 2014.2-0.3
 - Upstream 2014.2.rc2
 
