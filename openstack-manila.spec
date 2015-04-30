@@ -5,7 +5,7 @@
 
 Name:             openstack-manila
 Version:          2015.1
-Release:          0.2.rc1%{?dist}
+Release:          0.3.rc1%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
@@ -29,7 +29,6 @@ Patch0001:        0001-oslo.sphinx-patch.patch
 Patch0002:        0002-Remove-runtime-dep-on-pbr.patch
 
 BuildArch:        noarch
-# XXX Although intltool pulls gettext, we still traceback with undeclared '_'
 BuildRequires:    intltool
 BuildRequires:    python-d2to1
 BuildRequires:    python-oslo-sphinx
@@ -88,11 +87,15 @@ Requires:         python-keystoneclient
 Requires:         python-neutronclient
 Requires:         python-novaclient >= 1:2.15
 
-Requires:         python-oslo-config >= 1:1.2.0
-Requires:         python-oslo-db
+Requires:         python-oslo-concurrency >= 1.8.0
+Requires:         python-oslo-config >= 1.7.0
+Requires:         python-oslo-db >= 1.7.1
+Requires:         python-oslo-i18n >= 1.5.0
+Requires:         python-oslo-log
 Requires:         python-oslo-messaging >= 1.3.0-0.1.a9
 Requires:         python-oslo-rootwrap
-Requires:         python-oslo-utils
+Requires:         python-oslo-serialization >= 1.4.0
+Requires:         python-oslo-utils >= 1.4.0
 
 # We need pbr at runtime because it deterimines the version seen in API.
 Requires:         python-pbr
@@ -232,13 +235,6 @@ install -d -m 755 %{buildroot}%{_localstatedir}/run/manila
 mkdir -p %{buildroot}%{_datadir}/manila/rootwrap/
 install -p -D -m 644 etc/manila/rootwrap.d/* %{buildroot}%{_datadir}/manila/rootwrap/
 
-## Remove unneeded in production stuff
-# XXX Drop from Manila once we know for sure none of this is needed.
-#rm -f %{buildroot}%{_bindir}/cinder-debug
-#rm -fr %{buildroot}%{python_sitelib}/cinder/tests/
-#rm -fr %{buildroot}%{python_sitelib}/run_tests.*
-#rm -f %{buildroot}/usr/share/doc/cinder/README*
-
 %pre -n python-manila
 getent group manila >/dev/null || groupadd -r manila
 getent passwd manila >/dev/null || \
@@ -317,7 +313,10 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
-* Fri Apr 29 2015 Martin Mágr <mmagr@redhat.com> - 2015.1-0.2.rc1
+* Wed Apr 29 2015 Pete Zaitcev <zaitcev@redhat.com> - 2015.1-0.2.rc1
+- Set better dependencies from the results of testing, mostly python-oslo-*
+
+* Fri Apr 24 2015 Martin Mágr <mmagr@redhat.com> - 2015.1-0.2.rc1
 - Modified logrotate file so that log files won't grow too big (bz#1212485)
 
 * Wed Apr 22 2015 Pete Zaitcev <zaitcev@redhat.com> - 2015.1-0.1.rc1
