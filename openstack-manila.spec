@@ -1,16 +1,18 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
 
-%global milestone 0rc1
+## N.B. For next release: in the past Manila's milestones didn't have a dot.
+## If they gain a dot, put it into the milestone macro, like we do with dist.
+#global milestone rc2
 %global upstream_name manila
 
 Name:             openstack-manila
-Version:          2015.1
-Release:          0.3.rc1%{?dist}
+Version:          2015.1.0
+Release:          1%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
 URL:              https://wiki.openstack.org/wiki/Manila
-Source0:          http://tarballs.openstack.org/manila/%{upstream_name}-%{version}.%{milestone}.tar.gz
+Source0:          http://tarballs.openstack.org/manila/%{upstream_name}-%{version}%{?milestone}.tar.gz
 Source1:          manila.conf
 Source2:          manila.logrotate
 Source3:          manila-dist.conf
@@ -23,7 +25,7 @@ Source12:         openstack-manila-share.service
 Source20:         manila-sudoers
 
 #
-# patches_base=2015.1
+# patches_base=2015.1.0
 #
 Patch0001:        0001-oslo.sphinx-patch.patch
 Patch0002:        0002-Remove-runtime-dep-on-pbr.patch
@@ -160,7 +162,7 @@ This package contains the associated documentation.
 %endif
 
 %prep
-%autosetup -n %{upstream_name}-%{version}.%{milestone} -S git
+%autosetup -n %{upstream_name}-%{version}%{?milestone} -S git
 
 find . \( -name .gitignore -o -name .placeholder \) -delete
 
@@ -313,7 +315,10 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
-* Wed Apr 29 2015 Pete Zaitcev <zaitcev@redhat.com> - 2015.1-0.2.rc1
+* Thu Apr 30 2015 Pete Zaitcev <zaitcev@redhat.com> - 2015.1.0-1
+- Final Kilo release (2015.1.0)
+
+* Wed Apr 29 2015 Pete Zaitcev <zaitcev@redhat.com> - 2015.1-0.3.rc1
 - Set better dependencies from the results of testing, mostly python-oslo-*
 
 * Fri Apr 24 2015 Martin Mágr <mmagr@redhat.com> - 2015.1-0.2.rc1
