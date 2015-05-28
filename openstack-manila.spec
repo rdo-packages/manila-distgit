@@ -5,9 +5,11 @@
 #global milestone rc2
 %global upstream_name manila
 
+%{!?upstream_version: %global upstream_version %{version}%{?milestone}}
+
 Name:             openstack-manila
-Version:          2015.1.0
-Release:          1%{?dist}
+Version:          XXX
+Release:          XXX
 Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
@@ -23,12 +25,6 @@ Source11:         openstack-manila-scheduler.service
 Source12:         openstack-manila-share.service
 
 Source20:         manila-sudoers
-
-#
-# patches_base=2015.1.0
-#
-Patch0001:        0001-oslo.sphinx-patch.patch
-Patch0002:        0002-Remove-runtime-dep-on-pbr.patch
 
 BuildArch:        noarch
 BuildRequires:    intltool
@@ -162,7 +158,7 @@ This package contains the associated documentation.
 %endif
 
 %prep
-%autosetup -n %{upstream_name}-%{version}%{?milestone} -S git
+%autosetup -n %{upstream_name}-%{upstream_version} -S git
 
 find . \( -name .gitignore -o -name .placeholder \) -delete
 
@@ -315,40 +311,3 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
-* Thu Apr 30 2015 Pete Zaitcev <zaitcev@redhat.com> - 2015.1.0-1
-- Final Kilo release (2015.1.0)
-
-* Wed Apr 29 2015 Pete Zaitcev <zaitcev@redhat.com> - 2015.1-0.3.rc1
-- Set better dependencies from the results of testing, mostly python-oslo-*
-
-* Fri Apr 24 2015 Martin Mágr <mmagr@redhat.com> - 2015.1-0.2.rc1
-- Modified logrotate file so that log files won't grow too big (bz#1212485)
-
-* Wed Apr 22 2015 Pete Zaitcev <zaitcev@redhat.com> - 2015.1-0.1.rc1
-- Update to upstream 2015.1.0rc1
-- Use the OpenStack tarballs repository instead of raw Github
-
-* Tue Oct 14 2014 Haïkel Guémar <hguemar@fedoraproject.org> - 2014.2-0.3
-- Upstream 2014.2.rc2
-
-* Wed Sep 10 2014 Pete Zaitcev <zaitcev@redhat.com>
-- 2014.2-0.2
-- Address review comments bz#1125033 comment#2
-- Upstream removed jQuery
-
-* Sun Aug 10 2014 Pete Zaitcev <zaitcev@redhat.com>
-- 2013.2-0.9
-- Add dependency on python-neutronclient, else traceback
-- Split away the openstack-manila-share and its dependencies on lvm2 and samba
-
-* Wed Jul 30 2014 Pete Zaitcev <zaitcev@redhat.com>
-- 2013.2-0.8
-- Switch to dynamic UID/GID allocation per Packaging:UsersAndGroups
-
-* Tue Jul 29 2014 Pete Zaitcev <zaitcev@redhat.com>
-- 2013.2-0.7
-- Require python-pbr after all
-
-* Thu Jun 26 2014 Pete Zaitcev <zaitcev@redhat.com>
-- 2013.2-0.3
-- Initial testing RPM
