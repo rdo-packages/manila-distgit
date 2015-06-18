@@ -7,7 +7,7 @@
 
 Name:             openstack-manila
 Version:          2015.1.0
-Release:          1%{?dist}
+Release:          2%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
@@ -315,6 +315,9 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
+* Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2015.1.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Thu Apr 30 2015 Pete Zaitcev <zaitcev@redhat.com> - 2015.1.0-1
 - Final Kilo release (2015.1.0)
 
