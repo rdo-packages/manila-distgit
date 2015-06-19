@@ -8,6 +8,9 @@
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
 Name:             openstack-manila
+# Liberty semver reset
+# https://review.openstack.org/#/q/I6a35fa0dda798fad93b804d00a46af80f08d475c,n,z
+Epoch:            1
 Version:          XXX
 Release:          XXX
 Summary:          OpenStack Shared Filesystem Service
@@ -36,7 +39,7 @@ BuildRequires:    python-sphinx
 BuildRequires:    python2-devel
 
 Requires:         openstack-utils
-Requires:         python-manila = %{version}-%{release}
+Requires:         python-manila = %{epoch}:%{version}-%{release}
 
 Requires(post):   systemd
 Requires(preun):  systemd
@@ -113,7 +116,7 @@ This package contains the associated Python library.
 Summary:          An implementation of OpenStack Shared Filesystem Service
 Group:            Applications/System
 
-Requires:         python-manila = %{version}-%{release}
+Requires:         python-manila = %{epoch}:%{version}-%{release}
 
 Requires(post):   systemd-units
 Requires(preun):  systemd-units
@@ -137,7 +140,7 @@ exports shares, similar to a filer.
 Summary:          Documentation for OpenStack Shared Filesystem Service
 Group:            Documentation
 
-Requires:         %{name} = %{version}-%{release}
+Requires:         %{name} = %{epoch}:%{version}-%{release}
 
 BuildRequires:    systemd-units
 #BuildRequires:    graphviz
