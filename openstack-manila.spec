@@ -96,6 +96,7 @@ Requires:         python-oslo-log
 Requires:         python-oslo-messaging >= 1.3.0-0.1.a9
 Requires:         python-oslo-rootwrap
 Requires:         python-oslo-serialization >= 1.4.0
+Requires:         python-oslo-service
 Requires:         python-oslo-utils >= 1.4.0
 
 # We need pbr at runtime because it deterimines the version seen in API.
