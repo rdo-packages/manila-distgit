@@ -7,7 +7,7 @@
 
 Name:             openstack-manila
 Version:          2015.1.0
-Release:          2%{?dist}
+Release:          3%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
@@ -64,10 +64,6 @@ Requires:         sudo
 Requires:         MySQL-python
 
 Requires:         python-paramiko
-
-Requires:         python-qpid
-Requires:         python-kombu
-Requires:         python-amqplib
 
 Requires:         python-eventlet
 Requires:         python-greenlet
@@ -315,6 +311,9 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
+* Mon Jun 29 2015 Pete Zaitcev <zaitcev@redhat.com> - 2015.1.0-3
+- Drop the direct dependencies on python-qpid et.al.
+
 * Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2015.1.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
