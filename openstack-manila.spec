@@ -24,11 +24,14 @@ Source12:         openstack-manila-share.service
 
 Source20:         manila-sudoers
 
-#
-# patches_base=2015.1.0
-#
-Patch0001:        0001-oslo.sphinx-patch.patch
-Patch0002:        0002-Remove-runtime-dep-on-pbr.patch
+Patch0001: 0001-Fix-AllocType-read-failure-in-Huawei-driver.patch
+Patch0002: 0002-Remove-direct-DB-calls-from-glusterfs_native-driver.patch
+Patch0003: 0003-Fix-share-server-resources-cleanup-in-generic-driver.patch
+Patch0004: 0004-Release-Neutron-ports-after-share-server-deletion-us.patch
+Patch0005: 0005-Fix-incompatiblity-issue-in-VNX-manila-driver.patch
+Patch0006: 0006-Updated-from-global-requirements.patch
+Patch0007: 0007-glusterfs_native-delete_snapshot-find-out-real-Glust.patch
+Patch0008: 0008-glusterfs_native-fix-delete-share.patch
 
 BuildArch:        noarch
 BuildRequires:    intltool
@@ -168,9 +171,6 @@ find manila -name \*.py -exec sed -i '/\/usr\/bin\/env python/{d;q}' {} +
 # to distutils requires_dist config
 rm -rf {test-,}requirements.txt tools/{pip,test}-requires
 
-# We add REDHATMANILAVERSION/RELEASE with the pbr removal patch
-sed -i s/REDHATMANILAVERSION/%{version}/ manila/version.py
-sed -i s/REDHATMANILARELEASE/%{release}/ manila/version.py
 
 %build
 %{__python2} setup.py build

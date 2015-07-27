@@ -1,0 +1,136 @@
+From 589cfc989d1ae2b58c36d90125dd578833679acd Mon Sep 17 00:00:00 2001
+From: Ramana Raja <rraja@redhat.com>
+Date: Wed, 15 Jul 2015 21:19:41 +0530
+Subject: [PATCH] glusterfs_native: fix delete share
+
+With GlusterFS 3.7.x versions, the delete share operation fails when
+deleting the contents of a GlusterFS volume, a share. This is because
+two directories are auto-created within a GlusterFS volume when it's
+started and GlusterFS refuses to unlink their paths. Fix this issue, by
+not trying to remove the two directory paths, but remove their contents
+and the rest of the contents of the volume.
+
+Change-Id: I1675bbf593bf578301d6899ee3f9860320080956
+Closes-Bug: #1473324
+(cherry picked from commit 29456c22999ee63aec529c0808264ba7c84fcb70)
+---
+ doc/source/devref/glusterfs_native_driver.rst      |  2 ++
+ etc/manila/rootwrap.d/share.filters                |  3 ++-
+ manila/share/drivers/glusterfs_native.py           | 26 +++++++++++++++++++---
+ .../tests/share/drivers/test_glusterfs_native.py   | 17 ++++++++++----
+ 4 files changed, 40 insertions(+), 8 deletions(-)
+
+diff --git a/doc/source/devref/glusterfs_native_driver.rst b/doc/source/devref/glusterfs_native_driver.rst
+index 5bf08c9..362bab4 100644
+--- a/doc/source/devref/glusterfs_native_driver.rst
++++ b/doc/source/devref/glusterfs_native_driver.rst
+@@ -112,6 +112,8 @@ Known Restrictions
+ - Certificate setup (aka trust setup) between instance and storage backend is
+   out of band of Manila.
+ - Support for 'create_share_from_snapshot' is planned for Liberty release.
++- For Manila to use GlusterFS volumes, the name of the trashcan directory in
++  GlusterFS volumes must not be changed from the default.
+ 
+ The :mod:`manila.share.drivers.glusterfs_native.GlusterfsNativeShareDriver` Module
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+diff --git a/etc/manila/rootwrap.d/share.filters b/etc/manila/rootwrap.d/share.filters
+index 04ac6eb..07e329d 100644
+--- a/etc/manila/rootwrap.d/share.filters
++++ b/etc/manila/rootwrap.d/share.filters
+@@ -28,8 +28,9 @@ ip: CommandFilter, ip, root
+ # manila/network/linux/interface.py: 'ovs-vsctl', 'add-port', '%s', '%s'
+ ovs-vsctl: CommandFilter, ovs-vsctl, root
+ 
++# manila/share/drivers/glusterfs_native.py: 'find', '%s', '-mindepth', '1', '!', '-path', '%s', '!', '-path', '%s', '-delete'
+ # manila/share/drivers/glusterfs_native.py: 'find', '%s', '-mindepth', '1', '-delete'
+-find_del: RegExpFilter, find, root, find, .*, -mindepth, 1, -delete
++find: CommandFilter, find, root
+ 
+ # manila/share/drivers/glusterfs_native.py: 'umount', '%s'
+ umount: CommandFilter, umount, root
+diff --git a/manila/share/drivers/glusterfs_native.py b/manila/share/drivers/glusterfs_native.py
+index 588c55c..082fbb7 100644
+--- a/manila/share/drivers/glusterfs_native.py
++++ b/manila/share/drivers/glusterfs_native.py
+@@ -26,7 +26,7 @@ Supports working with multiple glusterfs volumes.
+ """
+ 
+ import errno
+-import pipes
++import os
+ import random
+ import re
+ import shutil
+@@ -509,8 +509,28 @@ class GlusterfsNativeShareDriver(driver.ExecuteMixin, driver.ShareDriver):
+             shutil.rmtree(tmpdir, ignore_errors=True)
+             raise
+ 
+-        # Delete only the contents, not the directory.
+-        cmd = ['find', pipes.quote(tmpdir), '-mindepth', '1', '-delete']
++        # extracting Gluster server address, i.e.,'[remote_user]@host' from the
++        # GlusterManager object.
++        srvaddr = re.sub(':/' + gluster_mgr.volume + '$', '',
++                         gluster_mgr.qualified)
++
++        # Delete the contents of a GlusterFS volume that is temporarily
++        # mounted.
++        # From GlusterFS version 3.7, two directories, '.trashcan' at the root
++        # of the GlusterFS volume and 'internal_op' within the '.trashcan'
++        # directory, are internally created when a GlusterFS volume is started.
++        # GlusterFS does not allow unlink(2) of the two directories. So do not
++        # delete the paths of the two directories, but delete their contents
++        # along with the rest of the contents of the volume.
++        if glusterfs.GlusterManager.numreduct(self.glusterfs_versions[srvaddr]
++                                              ) < (3, 7):
++            cmd = ['find', tmpdir, '-mindepth', '1', '-delete']
++        else:
++            ignored_dirs = map(lambda x: os.path.join(tmpdir, *x),
++                               [('.trashcan', ), ('.trashcan', 'internal_op')])
++            cmd = ['find', tmpdir, '-mindepth', '1', '!', '-path',
++                   ignored_dirs[0], '!', '-path', ignored_dirs[1], '-delete']
++
+         try:
+             self._execute(*cmd, run_as_root=True)
+         except exception.ProcessExecutionError as exc:
+diff --git a/manila/tests/share/drivers/test_glusterfs_native.py b/manila/tests/share/drivers/test_glusterfs_native.py
+index dc86b9b..f641e81 100644
+--- a/manila/tests/share/drivers/test_glusterfs_native.py
++++ b/manila/tests/share/drivers/test_glusterfs_native.py
+@@ -118,7 +118,8 @@ class GlusterfsNativeShareDriverTestCase(test.TestCase):
+             self._driver = glusterfs_native.GlusterfsNativeShareDriver(
+                 self._db, execute=self._execute,
+                 configuration=self.fake_conf)
+-
++        self._driver.glusterfs_versions = {self.glusterfs_server1: ('3', '6'),
++                                           self.glusterfs_server2: ('3', '7')}
+         self.addCleanup(fake_utils.fake_execute_set_repliers, [])
+         self.addCleanup(fake_utils.fake_execute_clear_log)
+ 
+@@ -470,7 +471,14 @@ class GlusterfsNativeShareDriverTestCase(test.TestCase):
+         self.assertRaises(exception.GlusterfsException,
+                           self._driver._do_umount, tmpdir)
+ 
+-    def test_wipe_gluster_vol(self):
++    @ddt.data({'vers_minor': '6',
++               'cmd': 'find /tmp/tmpKGHKJ -mindepth 1 -delete'},
++              {'vers_minor': '7',
++               'cmd': 'find /tmp/tmpKGHKJ -mindepth 1 ! -path '
++                      '/tmp/tmpKGHKJ/.trashcan ! -path '
++                      '/tmp/tmpKGHKJ/.trashcan/internal_op -delete'})
++    @ddt.unpack
++    def test_wipe_gluster_vol(self, vers_minor, cmd):
+         self._driver._restart_gluster_vol = mock.Mock()
+         self._driver._do_mount = mock.Mock()
+         self._driver._do_umount = mock.Mock()
+@@ -483,8 +491,9 @@ class GlusterfsNativeShareDriverTestCase(test.TestCase):
+ 
+         gmgr = glusterfs.GlusterManager
+         gmgr1 = gmgr(self.glusterfs_target1, self._execute, None, None)
+-
+-        expected_exec = ['find /tmp/tmpKGHKJ -mindepth 1 -delete']
++        self._driver.glusterfs_versions = {
++            self.glusterfs_server1: ('3', vers_minor)}
++        expected_exec = [cmd]
+ 
+         self._driver._wipe_gluster_vol(gmgr1)
+ 

@@ -1,0 +1,45 @@
+From 38b0d5b524817c5b6fbbd0c23e0bd4f1e8a302f0 Mon Sep 17 00:00:00 2001
+From: peter_wang <peter.wang13@emc.com>
+Date: Mon, 15 Jun 2015 23:45:20 -0400
+Subject: [PATCH] Fix incompatiblity issue in VNX manila driver
+
+When running Manila with VNX File OE 8.1.6 or later,
+if user creates a NFS share in Manila, driver will
+report nas command error when setting nfs permission.
+
+This fix will use updated nas command to resolve it.
+
+Change-Id: I0550cdf01278fa4e9aeed7891152fed6dcc0eefc
+Closes-Bug: #1465543
+(cherry picked from commit 081f9226e46ba801ba7be8024aebb967aba7f2e9)
+---
+ manila/share/drivers/emc/plugins/vnx/helper.py | 2 +-
+ manila/tests/share/drivers/emc/test_emc_vnx.py | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/manila/share/drivers/emc/plugins/vnx/helper.py b/manila/share/drivers/emc/plugins/vnx/helper.py
+index 22bd8b5..6be2058 100644
+--- a/manila/share/drivers/emc/plugins/vnx/helper.py
++++ b/manila/share/drivers/emc/plugins/vnx/helper.py
+@@ -1333,7 +1333,7 @@ class NASCommandHelper(object):
+         share_path = '/' + share_name
+         create_nfs_share_cmd = [
+             'env', 'NAS_DB=/nas', '/nas/bin/server_export', mover_name,
+-            '-option', 'rw=-*.*.*.*,root=-*.*.*.*,access=-*.*.*.*',
++            '-option', 'rw=-0.0.0.0,root=-0.0.0.0,access=-0.0.0.0',
+             share_path,
+         ]
+ 
+diff --git a/manila/tests/share/drivers/emc/test_emc_vnx.py b/manila/tests/share/drivers/emc/test_emc_vnx.py
+index 17fa4f8..2da65d8 100644
+--- a/manila/tests/share/drivers/emc/test_emc_vnx.py
++++ b/manila/tests/share/drivers/emc/test_emc_vnx.py
+@@ -180,7 +180,7 @@ disks     = d7
+ 
+     @staticmethod
+     def create_nfs_export(vdm_name, path):
+-        default_access = "rw=-*.*.*.*,root=-*.*.*.*,access=-*.*.*.*"
++        default_access = "rw=-0.0.0.0,root=-0.0.0.0,access=-0.0.0.0"
+         return [
+             'env', 'NAS_DB=/nas', '/nas/bin/server_export', vdm_name,
+             '-option', default_access,
