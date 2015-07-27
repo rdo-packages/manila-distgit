@@ -7,7 +7,7 @@
 
 Name:             openstack-manila
 Version:          2015.1.0
-Release:          3%{?dist}
+Release:          4%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
@@ -23,6 +23,7 @@ Source11:         openstack-manila-scheduler.service
 Source12:         openstack-manila-share.service
 
 Source20:         manila-sudoers
+
 
 Patch0001: 0001-Fix-AllocType-read-failure-in-Huawei-driver.patch
 Patch0002: 0002-Remove-direct-DB-calls-from-glusterfs_native-driver.patch
@@ -311,6 +312,9 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
+* Mon Jul 27 2015 Haïkel Guémar <hguemar@fedoraproject.org> - 2015.1.0-4
+- Update to latest stable/kilo
+
 * Mon Jun 29 2015 Pete Zaitcev <zaitcev@redhat.com> - 2015.1.0-3
 - Drop the direct dependencies on python-qpid et.al.
 
