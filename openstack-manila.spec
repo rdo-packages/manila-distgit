@@ -84,12 +84,15 @@ Requires:         python-paste-deploy
 Requires:         python-routes
 Requires:         python-webob
 
+Requires:         python-cinderclient
 Requires:         python-keystoneclient
+Requires:         python-keystonemiddleware
 Requires:         python-neutronclient
 Requires:         python-novaclient >= 1:2.15
 
 Requires:         python-oslo-concurrency >= 1.8.0
 Requires:         python-oslo-config >= 1.7.0
+Requires:         python-oslo-context >= 0.2.0
 Requires:         python-oslo-db >= 1.7.1
 Requires:         python-oslo-i18n >= 1.5.0
 Requires:         python-oslo-log
