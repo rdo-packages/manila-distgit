@@ -240,6 +240,9 @@ install -d -m 755 %{buildroot}%{_localstatedir}/run/manila
 mkdir -p %{buildroot}%{_datadir}/manila/rootwrap/
 install -p -D -m 644 etc/manila/rootwrap.d/* %{buildroot}%{_datadir}/manila/rootwrap/
 
+# Install tempest tests files
+cp -r manila_tempest_tests %{buildroot}%{python2_sitelib}/manila_tempest_tests
+
 %pre -n python-manila
 getent group manila >/dev/null || groupadd -r manila
 getent passwd manila >/dev/null || \
@@ -303,6 +306,8 @@ getent passwd manila >/dev/null || \
 
 %{python_sitelib}/manila
 %{python_sitelib}/manila-%{version}*.egg-info
+# Tempest tests
+%{python_sitelib}/manila_tempest_tests
 
 %{_bindir}/manila-all
 %{_bindir}/manila-manage
