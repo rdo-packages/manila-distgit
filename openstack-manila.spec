@@ -175,10 +175,6 @@ find manila -name \*.py -exec sed -i '/\/usr\/bin\/env python/{d;q}' {} +
 # to distutils requires_dist config
 rm -rf {test-,}requirements.txt tools/{pip,test}-requires
 
-# We add REDHATMANILAVERSION/RELEASE with the pbr removal patch
-sed -i s/REDHATMANILAVERSION/%{version}/ manila/version.py
-sed -i s/REDHATMANILARELEASE/%{release}/ manila/version.py
-
 %build
 %{__python2} setup.py build
 
@@ -304,10 +300,10 @@ getent passwd manila >/dev/null || \
 %dir %attr(0750, manila, root) %{_localstatedir}/log/manila
 %dir %attr(0755, manila, root) %{_localstatedir}/run/manila
 
-%{python_sitelib}/manila
-%{python_sitelib}/manila-%{version}*.egg-info
+%{python2_sitelib}/manila
+%{python2_sitelib}/manila-%{version}*.egg-info
 # Tempest tests
-%{python_sitelib}/manila_tempest_tests
+%{python2_sitelib}/manila_tempest_tests
 
 %{_bindir}/manila-all
 %{_bindir}/manila-manage
