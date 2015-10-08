@@ -4,15 +4,21 @@
 ## If they gain a dot, put it into the milestone macro, like we do with dist.
 #global milestone rc2
 %global upstream_name manila
+%global milestone .0rc2
+
+%{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
 Name:             openstack-manila
-Version:          2015.1.0
-Release:          4%{?dist}
+# Liberty semver reset
+# https://review.openstack.org/#/q/I6a35fa0dda798fad93b804d00a46af80f08d475c,n,z
+Epoch:            1
+Version:          1.0.0
+Release:          0.1%{?milestone}%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
 URL:              https://wiki.openstack.org/wiki/Manila
-Source0:          http://tarballs.openstack.org/manila/%{upstream_name}-%{version}%{?milestone}.tar.gz
+Source0:          http://tarballs.openstack.org/manila/%{upstream_name}-%{upstream_version}.tar.gz
 Source1:          manila.conf
 Source2:          manila.logrotate
 Source3:          manila-dist.conf
@@ -25,14 +31,9 @@ Source12:         openstack-manila-share.service
 Source20:         manila-sudoers
 
 
-Patch0001: 0001-Fix-AllocType-read-failure-in-Huawei-driver.patch
-Patch0002: 0002-Remove-direct-DB-calls-from-glusterfs_native-driver.patch
-Patch0003: 0003-Fix-share-server-resources-cleanup-in-generic-driver.patch
-Patch0004: 0004-Release-Neutron-ports-after-share-server-deletion-us.patch
-Patch0005: 0005-Fix-incompatiblity-issue-in-VNX-manila-driver.patch
-Patch0006: 0006-Updated-from-global-requirements.patch
-Patch0007: 0007-glusterfs_native-delete_snapshot-find-out-real-Glust.patch
-Patch0008: 0008-glusterfs_native-fix-delete-share.patch
+#
+# patches_base=1.0.0.0rc2
+#
 
 BuildArch:        noarch
 BuildRequires:    intltool
@@ -44,7 +45,7 @@ BuildRequires:    python-sphinx
 BuildRequires:    python2-devel
 
 Requires:         openstack-utils
-Requires:         python-manila = %{version}-%{release}
+Requires:         python-manila = %{epoch}:%{version}-%{release}
 
 Requires(post):   systemd
 Requires(preun):  systemd
@@ -69,6 +70,10 @@ Requires:         MySQL-python
 
 Requires:         python-paramiko
 
+Requires:         python-qpid
+Requires:         python-kombu
+Requires:         python-amqplib
+
 Requires:         python-eventlet
 Requires:         python-greenlet
 Requires:         python-iso8601
@@ -85,18 +90,22 @@ Requires:         python-paste-deploy
 Requires:         python-routes
 Requires:         python-webob
 
+Requires:         python-cinderclient
 Requires:         python-keystoneclient
+Requires:         python-keystonemiddleware
 Requires:         python-neutronclient
 Requires:         python-novaclient >= 1:2.15
 
 Requires:         python-oslo-concurrency >= 1.8.0
 Requires:         python-oslo-config >= 1.7.0
+Requires:         python-oslo-context >= 0.2.0
 Requires:         python-oslo-db >= 1.7.1
 Requires:         python-oslo-i18n >= 1.5.0
 Requires:         python-oslo-log
 Requires:         python-oslo-messaging >= 1.3.0-0.1.a9
 Requires:         python-oslo-rootwrap
 Requires:         python-oslo-serialization >= 1.4.0
+Requires:         python-oslo-service
 Requires:         python-oslo-utils >= 1.4.0
 
 # We need pbr at runtime because it deterimines the version seen in API.
@@ -117,7 +126,7 @@ This package contains the associated Python library.
 Summary:          An implementation of OpenStack Shared Filesystem Service
 Group:            Applications/System
 
-Requires:         python-manila = %{version}-%{release}
+Requires:         python-manila = %{epoch}:%{version}-%{release}
 
 Requires(post):   systemd-units
 Requires(preun):  systemd-units
@@ -141,7 +150,7 @@ exports shares, similar to a filer.
 Summary:          Documentation for OpenStack Shared Filesystem Service
 Group:            Documentation
 
-Requires:         %{name} = %{version}-%{release}
+Requires:         %{name} = %{epoch}:%{version}-%{release}
 
 BuildRequires:    systemd-units
 #BuildRequires:    graphviz
@@ -162,7 +171,7 @@ This package contains the associated documentation.
 %endif
 
 %prep
-%autosetup -n %{upstream_name}-%{version}%{?milestone} -S git
+%autosetup -n %{upstream_name}-%{upstream_version} -S git
 
 find . \( -name .gitignore -o -name .placeholder \) -delete
 
@@ -171,7 +180,6 @@ find manila -name \*.py -exec sed -i '/\/usr\/bin\/env python/{d;q}' {} +
 # Remove the requirements file so that pbr hooks don't add it
 # to distutils requires_dist config
 rm -rf {test-,}requirements.txt tools/{pip,test}-requires
-
 
 %build
 %{__python2} setup.py build
@@ -234,6 +242,9 @@ install -d -m 755 %{buildroot}%{_localstatedir}/run/manila
 mkdir -p %{buildroot}%{_datadir}/manila/rootwrap/
 install -p -D -m 644 etc/manila/rootwrap.d/* %{buildroot}%{_datadir}/manila/rootwrap/
 
+# Install tempest tests files
+cp -r manila_tempest_tests %{buildroot}%{python2_sitelib}/manila_tempest_tests
+
 %pre -n python-manila
 getent group manila >/dev/null || groupadd -r manila
 getent passwd manila >/dev/null || \
@@ -295,8 +306,10 @@ getent passwd manila >/dev/null || \
 %dir %attr(0750, manila, root) %{_localstatedir}/log/manila
 %dir %attr(0755, manila, root) %{_localstatedir}/run/manila
 
-%{python_sitelib}/manila
-%{python_sitelib}/manila-%{version}*.egg-info
+%{python2_sitelib}/manila
+%{python2_sitelib}/manila-%{version}*.egg-info
+# Tempest tests
+%{python2_sitelib}/manila_tempest_tests
 
 %{_bindir}/manila-all
 %{_bindir}/manila-manage
@@ -312,6 +325,9 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
+* Thu Oct 08 2015 Haikel Guemar <hguemar@fedoraproject.org> 1:1.0.0-0.1.0rc2
+- Update to upstream 1.0.0.0rc2
+
 * Mon Jul 27 2015 Haïkel Guémar <hguemar@fedoraproject.org> - 2015.1.0-4
 - Update to latest stable/kilo
 
