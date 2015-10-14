@@ -60,8 +60,6 @@ Group:            Applications/System
 # Rootwrap in 2013.2 and later deprecates anything but sudo.
 Requires:         sudo
 
-Requires:         MySQL-python
-
 Requires:         python-paramiko
 
 Requires:         python-qpid
