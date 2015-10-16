@@ -4,7 +4,6 @@
 ## If they gain a dot, put it into the milestone macro, like we do with dist.
 #global milestone rc2
 %global upstream_name manila
-%global milestone .0rc2
 
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
@@ -13,7 +12,7 @@ Name:             openstack-manila
 # https://review.openstack.org/#/q/I6a35fa0dda798fad93b804d00a46af80f08d475c,n,z
 Epoch:            1
 Version:          1.0.0
-Release:          0.1%{?milestone}%{?dist}
+Release:          2%{?milestone}%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
@@ -30,10 +29,6 @@ Source12:         openstack-manila-share.service
 
 Source20:         manila-sudoers
 
-
-#
-# patches_base=1.0.0.0rc2
-#
 
 BuildArch:        noarch
 BuildRequires:    intltool
@@ -76,6 +71,7 @@ Requires:         python-amqplib
 
 Requires:         python-eventlet
 Requires:         python-greenlet
+Requires:         python-httplib2 >= 0.7.5
 Requires:         python-iso8601
 Requires:         python-netaddr
 Requires:         python-lxml
@@ -85,6 +81,7 @@ Requires:         python-suds
 
 Requires:         python-sqlalchemy
 Requires:         python-migrate
+Requires:         python-alembic >= 0.8.0
 
 Requires:         python-paste-deploy
 Requires:         python-routes
@@ -103,6 +100,8 @@ Requires:         python-oslo-db >= 1.7.1
 Requires:         python-oslo-i18n >= 1.5.0
 Requires:         python-oslo-log
 Requires:         python-oslo-messaging >= 1.3.0-0.1.a9
+Requires:         python-oslo-middleware >= 2.8.0
+Requires:         python-oslo-policy >= 0.5.0
 Requires:         python-oslo-rootwrap
 Requires:         python-oslo-serialization >= 1.4.0
 Requires:         python-oslo-service
@@ -110,8 +109,10 @@ Requires:         python-oslo-utils >= 1.4.0
 
 # We need pbr at runtime because it deterimines the version seen in API.
 Requires:         python-pbr
-
+Requires:         python-retrying >= 1.2.3
+Requires:         python-requests >= 2.5.2
 Requires:         python-six >= 1.5.0
+Requires:         python-stevedore >= 1.5.0
 
 Requires:         python-babel
 Requires:         python-lockfile
@@ -325,6 +326,9 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
+* Fri Oct 16 2015 Haikel Guemar <hguemar@fedoraproject.org> 1:1.0.0-2
+- Update to upstream 1.0.0
+
 * Thu Oct 08 2015 Haikel Guemar <hguemar@fedoraproject.org> 1:1.0.0-0.1.0rc2
 - Update to upstream 1.0.0.0rc2
 
