@@ -21,7 +21,6 @@ Source0:          http://tarballs.openstack.org/manila/%{upstream_name}-%{versio
 Source1:          manila.conf
 Source2:          manila.logrotate
 Source3:          manila-dist.conf
-Source4:          api-paste.ini
 
 Source10:         openstack-manila-api.service
 Source11:         openstack-manila-scheduler.service
@@ -213,7 +212,7 @@ install -p -D -m 640 etc/manila/rootwrap.conf %{buildroot}%{_sysconfdir}/manila/
 # but there's apparently no way to override the value in api-paste.ini
 # from manila.conf. So we keep a forked api-paste.ini around for now.
 #install -p -D -m 640 etc/manila/api-paste.ini %{buildroot}%{_sysconfdir}/manila/api-paste.ini
-install -p -D -m 640 %{SOURCE4} %{buildroot}%{_sysconfdir}/manila/api-paste.ini
+install -p -D -m 640 etc/manila/api-paste.ini %{buildroot}%{_sysconfdir}/manila/api-paste.ini
 install -p -D -m 640 etc/manila/policy.json %{buildroot}%{_sysconfdir}/manila/policy.json
 
 # Install initscripts for services
