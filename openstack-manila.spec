@@ -18,7 +18,6 @@ Summary:          OpenStack Shared Filesystem Service
 License:          ASL 2.0
 URL:              https://wiki.openstack.org/wiki/Manila
 Source0:          http://tarballs.openstack.org/manila/%{upstream_name}-%{version}%{?milestone}.tar.gz
-Source1:          manila.conf
 Source2:          manila.logrotate
 Source3:          manila-dist.conf
 
@@ -65,6 +64,7 @@ Requires:         python-qpid
 Requires:         python-kombu
 Requires:         python-amqplib
 
+Requires:         python-alembic
 Requires:         python-eventlet
 Requires:         python-greenlet
 Requires:         python-iso8601
@@ -72,6 +72,9 @@ Requires:         python-netaddr
 Requires:         python-lxml
 Requires:         python-anyjson
 Requires:         python-cheetah
+Requires:         python-requests >= 2.5.2
+Requires:         python-retrying >= 1.2.3
+Requires:         python-stevedore >= 1.5.0
 Requires:         python-suds
 
 Requires:         python-sqlalchemy
@@ -94,6 +97,8 @@ Requires:         python-oslo-db >= 1.7.1
 Requires:         python-oslo-i18n >= 1.5.0
 Requires:         python-oslo-log
 Requires:         python-oslo-messaging >= 1.3.0-0.1.a9
+Requires:         python-oslo-middleware
+Requires:         python-oslo-policy >= 0.5.0
 Requires:         python-oslo-rootwrap
 Requires:         python-oslo-serialization >= 1.4.0
 Requires:         python-oslo-service
@@ -106,6 +111,19 @@ Requires:         python-six >= 1.5.0
 
 Requires:         python-babel
 Requires:         python-lockfile
+
+# Config file generation dependencies
+BuildRequires:    python-oslo-config >= 1.7.0
+BuildRequires:    python-oslo-concurrency >= 1.8.0
+BuildRequires:    python-oslo-db >= 1.7.1
+BuildRequires:    python-oslo-messaging >= 1.3.0-0.1.a9
+BuildRequires:    python-oslo-middleware
+BuildRequires:    python-oslo-policy >= 0.5.0
+BuildRequires:    python-keystonemiddleware
+BuildRequires:    python-cinderclient
+BuildRequires:    python-neutronclient
+BuildRequires:    python-novaclient >= 1:2.15
+BuildRequires:    python-paramiko
 
 %description -n   python-manila
 OpenStack Shared Filesystem Service (code-name Manila) provides services
@@ -173,6 +191,9 @@ find manila -name \*.py -exec sed -i '/\/usr\/bin\/env python/{d;q}' {} +
 rm -rf {test-,}requirements.txt tools/{pip,test}-requires
 
 %build
+# Generate config file
+PYTHONPATH=. oslo-config-generator --config-file=etc/oslo-config-generator/manila.conf
+
 %{__python2} setup.py build
 
 %install
@@ -205,7 +226,7 @@ install -d -m 755 %{buildroot}%{_localstatedir}/log/manila
 
 # Install config files
 install -d -m 755 %{buildroot}%{_sysconfdir}/manila
-install -p -D -m 640 %{SOURCE1} %{buildroot}%{_sysconfdir}/manila/manila.conf
+install -p -D -m 640 etc/manila/manila.conf.sample %{buildroot}%{_sysconfdir}/manila/manila.conf
 install -p -D -m 644 %{SOURCE3} %{buildroot}%{_datadir}/manila/manila-dist.conf
 install -p -D -m 640 etc/manila/rootwrap.conf %{buildroot}%{_sysconfdir}/manila/rootwrap.conf
 # XXX We want to set signing_dir to /var/lib/manila/keystone-signing,
