@@ -11,8 +11,8 @@ Name:             openstack-manila
 # Liberty semver reset
 # https://review.openstack.org/#/q/I6a35fa0dda798fad93b804d00a46af80f08d475c,n,z
 Epoch:            1
-Version:          1.0.0
-Release:          3%{?milestone}%{?dist}
+Version:          1.0.1
+Release:          1%{?milestone}%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
@@ -325,6 +325,9 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
+* Tue Dec 22 2015 Haikel Guemar <hguemar@fedoraproject.org> 1:1.0.1-1
+- Update to 1.0.1
+
 * Fri Oct 16 2015 Haikel Guemar <hguemar@fedoraproject.org> 1:1.0.0-2
 - Update to upstream 1.0.0
 
