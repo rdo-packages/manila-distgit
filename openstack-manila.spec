@@ -85,6 +85,7 @@ Requires:         python-routes
 Requires:         python-webob
 
 Requires:         python-cinderclient
+Requires:         python-keystoneauth1
 Requires:         python-keystoneclient
 Requires:         python-keystonemiddleware
 Requires:         python-neutronclient
@@ -119,6 +120,7 @@ BuildRequires:    python-oslo-db >= 1.7.1
 BuildRequires:    python-oslo-messaging >= 1.3.0-0.1.a9
 BuildRequires:    python-oslo-middleware
 BuildRequires:    python-oslo-policy >= 0.5.0
+BuildRequires:    python-keystoneauth1
 BuildRequires:    python-keystonemiddleware
 BuildRequires:    python-cinderclient
 BuildRequires:    python-neutronclient
