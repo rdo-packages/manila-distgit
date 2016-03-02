@@ -24,6 +24,7 @@ Source3:          manila-dist.conf
 Source10:         openstack-manila-api.service
 Source11:         openstack-manila-scheduler.service
 Source12:         openstack-manila-share.service
+Source13:         openstack-manila-data.service
 
 Source20:         manila-sudoers
 
@@ -242,6 +243,7 @@ install -p -D -m 640 etc/manila/policy.json %{buildroot}%{_sysconfdir}/manila/po
 install -p -D -m 644 %{SOURCE10} %{buildroot}%{_unitdir}/%{name}-api.service
 install -p -D -m 644 %{SOURCE11} %{buildroot}%{_unitdir}/%{name}-scheduler.service
 install -p -D -m 644 %{SOURCE12} %{buildroot}%{_unitdir}/%{name}-share.service
+install -p -D -m 644 %{SOURCE12} %{buildroot}%{_unitdir}/%{name}-data.service
 
 # Install sudoers
 install -p -D -m 440 %{SOURCE20} %{buildroot}%{_sysconfdir}/sudoers.d/manila
@@ -268,14 +270,17 @@ getent passwd manila >/dev/null || \
 %post
 %systemd_post %{name}-api.service
 %systemd_post %{name}-scheduler.service
+%systemd_post %{name}-data.service
 
 %preun
 %systemd_preun %{name}-api.service
 %systemd_preun %{name}-scheduler.service
+%systemd_preun %{name}-data.service
 
 %postun
 %systemd_postun_with_restart %{name}-api.service
 %systemd_postun_with_restart %{name}-scheduler.service
+%systemd_postun_with_restart %{name}-data.service
 
 %post -n %{name}-share
 %systemd_post %{name}-share.service
@@ -289,8 +294,10 @@ getent passwd manila >/dev/null || \
 %files
 %{_bindir}/manila-api
 %{_bindir}/manila-scheduler
+%{_bindir}/manila-data
 %{_unitdir}/%{name}-api.service
 %{_unitdir}/%{name}-scheduler.service
+%{_unitdir}/%{name}-data.service
 %{_mandir}/man1/manila*.1.gz
 
 %defattr(-, manila, manila, -)
@@ -298,7 +305,7 @@ getent passwd manila >/dev/null || \
 %dir %{_sharedstatedir}/manila/tmp
 
 %files -n python-manila
-%doc LICENSE
+%license LICENSE
 
 # Aww, this is awkward. The python-manila itself does not need or provide
 # any configurations, but since it's the bracket package, there's no choice.
