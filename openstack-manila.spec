@@ -157,6 +157,17 @@ to manage network filesystems for use by Virtual Machine instances.
 This package contains a reference implementation of a service that
 exports shares, similar to a filer.
 
+%package -n python-manila-tests
+Summary:        Manila tests
+Requires:       openstack-manila = %{epoch}:%{version}-%{release}
+
+%description -n python-manila-tests
+OpenStack Shared Filesystem Service (code-name Manila) provides services
+to manage network filesystems for use by Virtual Machine instances.
+
+This package contains the Manila test files.
+
+
 %if 0%{?with_doc}
 %package doc
 Summary:          Documentation for OpenStack Shared Filesystem Service
@@ -332,8 +343,13 @@ getent passwd manila >/dev/null || \
 
 %{python2_sitelib}/manila
 %{python2_sitelib}/manila-%{version}*.egg-info
-# Tempest tests
+%exclude %{python2_sitelib}/manila_tempest_tests
+%exclude %{python2_sitelib}/manila/tests
+
+%files -n python-manila-tests
+%license LICENSE
 %{python2_sitelib}/manila_tempest_tests
+%{python2_sitelib}/manila/tests
 
 %{_bindir}/manila-all
 %{_bindir}/manila-manage
