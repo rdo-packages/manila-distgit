@@ -193,6 +193,9 @@ find manila -name \*.py -exec sed -i '/\/usr\/bin\/env python/{d;q}' {} +
 # to distutils requires_dist config
 rm -rf {test-,}requirements.txt tools/{pip,test}-requires
 
+# FIXME avoid LXD dependency - real fix is to make drivers fully pluggable upstream
+sed -i '/lxd/ s/^/#/' manila/opts.py
+
 %build
 # Generate config file
 PYTHONPATH=. oslo-config-generator --config-file=etc/oslo-config-generator/manila.conf
