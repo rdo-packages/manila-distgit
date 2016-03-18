@@ -346,14 +346,14 @@ getent passwd manila >/dev/null || \
 %exclude %{python2_sitelib}/manila_tempest_tests
 %exclude %{python2_sitelib}/manila/tests
 
+%{_bindir}/manila-all
+%{_bindir}/manila-manage
+%{_bindir}/manila-rootwrap
+
 %files -n python-manila-tests
 %license LICENSE
 %{python2_sitelib}/manila_tempest_tests
 %{python2_sitelib}/manila/tests
-
-%{_bindir}/manila-all
-%{_bindir}/manila-manage
-%{_bindir}/manila-rootwrap
 
 %files -n %{name}-share
 %{_bindir}/manila-share
