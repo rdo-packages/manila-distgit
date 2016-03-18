@@ -1,3 +1,4 @@
+%define milestone .0rc1
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
 
 ## N.B. For next release: in the past Manila's milestones didn't have a dot.
@@ -11,13 +12,13 @@ Name:             openstack-manila
 # Liberty semver reset
 # https://review.openstack.org/#/q/I6a35fa0dda798fad93b804d00a46af80f08d475c,n,z
 Epoch:            1
-Version:          XXX
-Release:          XXX
+Version:          2.0.0
+Release:          0.1%{?milestone}%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
 URL:              https://wiki.openstack.org/wiki/Manila
-Source0:          http://tarballs.openstack.org/manila/%{upstream_name}-%{version}%{?milestone}.tar.gz
+Source0:          http://tarballs.openstack.org/manila/%{upstream_name}-%{upstream_version}.tar.gz
 Source2:          manila.logrotate
 Source3:          manila-dist.conf
 
@@ -346,14 +347,14 @@ getent passwd manila >/dev/null || \
 %exclude %{python2_sitelib}/manila_tempest_tests
 %exclude %{python2_sitelib}/manila/tests
 
+%{_bindir}/manila-all
+%{_bindir}/manila-manage
+%{_bindir}/manila-rootwrap
+
 %files -n python-manila-tests
 %license LICENSE
 %{python2_sitelib}/manila_tempest_tests
 %{python2_sitelib}/manila/tests
-
-%{_bindir}/manila-all
-%{_bindir}/manila-manage
-%{_bindir}/manila-rootwrap
 
 %files -n %{name}-share
 %{_bindir}/manila-share
@@ -365,3 +366,5 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
+* Thu Mar 24 2016 RDO <rdo-list@redhat.com> 2.0.0-0.1.0rc1
+- RC1 Rebuild for Mitaka rc1
