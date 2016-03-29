@@ -61,10 +61,6 @@ Requires:         sudo
 
 Requires:         python-paramiko
 
-Requires:         python-qpid
-Requires:         python-kombu
-Requires:         python-amqplib
-
 Requires:         python-alembic
 Requires:         python-eventlet
 Requires:         python-greenlet
