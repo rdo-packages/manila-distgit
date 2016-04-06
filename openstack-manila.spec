@@ -91,42 +91,42 @@ Requires:         python-keystoneauth1
 Requires:         python-keystoneclient
 Requires:         python-keystonemiddleware
 Requires:         python-neutronclient
-Requires:         python-novaclient >= 1:2.15
+Requires:         python-novaclient >= 1:2.29.0
 
-Requires:         python-oslo-concurrency >= 1.8.0
-Requires:         python-oslo-config >= 1.7.0
+Requires:         python-oslo-concurrency >= 3.5.0
+Requires:         python-oslo-config >= 3.7.0
 Requires:         python-oslo-context >= 0.2.0
-Requires:         python-oslo-db >= 1.7.1
-Requires:         python-oslo-i18n >= 1.5.0
+Requires:         python-oslo-db >= 4.1.0
+Requires:         python-oslo-i18n >= 2.1.0
 Requires:         python-oslo-log
-Requires:         python-oslo-messaging >= 1.3.0-0.1.a9
+Requires:         python-oslo-messaging >= 4.0.0
 Requires:         python-oslo-middleware
 Requires:         python-oslo-policy >= 0.5.0
 Requires:         python-oslo-rootwrap
-Requires:         python-oslo-serialization >= 1.4.0
+Requires:         python-oslo-serialization >= 1.10.0
 Requires:         python-oslo-service
-Requires:         python-oslo-utils >= 1.4.0
+Requires:         python-oslo-utils >= 3.5.0
 
 # We need pbr at runtime because it deterimines the version seen in API.
 Requires:         python-pbr
 
-Requires:         python-six >= 1.5.0
+Requires:         python-six >= 1.9.0
 
 Requires:         python-babel
 Requires:         python-lockfile
 
 # Config file generation dependencies
-BuildRequires:    python-oslo-config >= 1.7.0
-BuildRequires:    python-oslo-concurrency >= 1.8.0
-BuildRequires:    python-oslo-db >= 1.7.1
-BuildRequires:    python-oslo-messaging >= 1.3.0-0.1.a9
+BuildRequires:    python-oslo-config >= 3.7.0
+BuildRequires:    python-oslo-concurrency >= 3.5.0
+BuildRequires:    python-oslo-db >= 4.1.0
+BuildRequires:    python-oslo-messaging >= 4.0.0
 BuildRequires:    python-oslo-middleware
 BuildRequires:    python-oslo-policy >= 0.5.0
 BuildRequires:    python-keystoneauth1
 BuildRequires:    python-keystonemiddleware
 BuildRequires:    python-cinderclient
 BuildRequires:    python-neutronclient
-BuildRequires:    python-novaclient >= 1:2.15
+BuildRequires:    python-novaclient >= 1:2.29
 BuildRequires:    python-paramiko
 
 %description -n   python-manila
