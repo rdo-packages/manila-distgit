@@ -1,4 +1,3 @@
-%define milestone .0rc1
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
 
 ## N.B. For next release: in the past Manila's milestones didn't have a dot.
@@ -13,7 +12,7 @@ Name:             openstack-manila
 # https://review.openstack.org/#/q/I6a35fa0dda798fad93b804d00a46af80f08d475c,n,z
 Epoch:            1
 Version:          2.0.0
-Release:          0.1%{?milestone}%{?dist}
+Release:          1%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
@@ -366,5 +365,8 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
+* Thu Apr  7 2016 Haïkel Guémar <hguemar@fedoraproject.org> - 1:2.0.0-1
+- Upstream 2.0.0
+
 * Thu Mar 24 2016 RDO <rdo-list@redhat.com> 2.0.0-0.1.0rc1
 - RC1 Rebuild for Mitaka rc1
