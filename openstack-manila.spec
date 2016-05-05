@@ -176,6 +176,7 @@ BuildRequires:    systemd-units
 
 # Required to build module documents
 BuildRequires:    python-eventlet
+BuildRequires:    python-openstackdocstheme
 BuildRequires:    python-routes
 BuildRequires:    python-sqlalchemy
 BuildRequires:    python-webob
