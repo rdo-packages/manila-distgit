@@ -36,6 +36,11 @@ BuildRequires:    python-pbr
 BuildRequires:    python-setuptools
 BuildRequires:    python-sphinx
 BuildRequires:    python2-devel
+BuildRequires:    python-openstackdocstheme
+BuildRequires:    python-mock
+BuildRequires:    python-oslotest
+BuildRequires:    python-lxml
+BuildRequires:    python-ddt
 
 Requires:         openstack-utils
 Requires:         python-manila = %{epoch}:%{version}-%{release}
