@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dabed58f_8fc3f937",
+        "filename": "openstack-manila.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 85
+      },
+      "writtenOn": "2016-05-09T10:40:43Z",
+      "side": 1,
+      "message": "This diverges from rpm-master, future cherry-picks might have unnecessary conflicts. Proper way would have been to make this a separate change on rpm-master (not squash it into ftbfs fix) then cherry pick it to rpm-RELEASE.",
+      "revId": "d853fd8c7c0199191a6021574154e64450c3e007",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
