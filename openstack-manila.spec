@@ -34,8 +34,14 @@ BuildRequires:    python-d2to1
 BuildRequires:    python-oslo-sphinx
 BuildRequires:    python-pbr
 BuildRequires:    python-setuptools
-BuildRequires:    python-sphinx
 BuildRequires:    python2-devel
+
+# Build Requirements for documentation
+BuildRequires:    python-sphinx
+BuildRequires:    python-mock
+BuildRequires:    python-oslotest
+BuildRequires:    python-lxml
+BuildRequires:    python-ddt
 
 Requires:         openstack-utils
 Requires:         python-manila = %{epoch}:%{version}-%{release}
