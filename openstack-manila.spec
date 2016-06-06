@@ -347,7 +347,6 @@ getent passwd manila >/dev/null || \
 %exclude %{python2_sitelib}/manila_tempest_tests
 %exclude %{python2_sitelib}/manila/tests
 
-%{_bindir}/manila-all
 %{_bindir}/manila-manage
 %{_bindir}/manila-rootwrap
 
