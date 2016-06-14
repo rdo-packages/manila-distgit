@@ -42,7 +42,6 @@ BuildRequires:    python-oslotest
 BuildRequires:    python-lxml
 BuildRequires:    python-ddt
 
-Requires:         openstack-utils
 Requires:         python-manila = %{epoch}:%{version}-%{release}
 
 Requires(post):   systemd
