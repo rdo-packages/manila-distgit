@@ -1,3 +1,4 @@
+%global milestone .0rc1
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
 
 ## N.B. For next release: in the past Manila's milestones didn't have a dot.
@@ -11,13 +12,17 @@ Name:             openstack-manila
 # Liberty semver reset
 # https://review.openstack.org/#/q/I6a35fa0dda798fad93b804d00a46af80f08d475c,n,z
 Epoch:            1
-Version:          XXX
-Release:          XXX
+Version:          3.0.0
+Release:          0.1%{?milestone}%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
 URL:              https://wiki.openstack.org/wiki/Manila
 Source0:          http://tarballs.openstack.org/manila/%{upstream_name}-%{version}%{?milestone}.tar.gz
+#
+# patches_base=3.0.0.0rc1
+#
+
 Source2:          manila.logrotate
 Source3:          manila-dist.conf
 
@@ -367,3 +372,6 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
+* Thu Sep 15 2016 Haikel Guemar <hguemar@fedoraproject.org> 1:3.0.0-0.1
+- Update to 3.0.0.0rc1
+
