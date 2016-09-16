@@ -17,7 +17,7 @@ Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
 URL:              https://wiki.openstack.org/wiki/Manila
-Source0:          http://tarballs.openstack.org/manila/%{upstream_name}-%{version}%{?milestone}.tar.gz
+Source0:          https://tarballs.openstack.org/manila/%{upstream_name}-%{version}%{?milestone}.tar.gz
 Source2:          manila.logrotate
 Source3:          manila-dist.conf
 
