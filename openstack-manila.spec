@@ -48,6 +48,7 @@ Requires(post):   systemd
 Requires(preun):  systemd
 Requires(postun): systemd
 Requires(pre):    shadow-utils
+Requires:         lsb-core-noarch
 
 # We pull the posix_ipc with Oslo's common lockutils.
 Requires:         python-posix_ipc
