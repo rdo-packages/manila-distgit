@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5adbc538_15497fd0",
+        "filename": "openstack-manila.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 75
+      },
+      "writtenOn": "2016-11-14T21:55:27Z",
+      "side": 1,
+      "message": "This was supposed to be \"pyparsing\", not \"python-pyparsing\".",
+      "revId": "6e828f30cf30b6426e7e1d76aad07f2d02bc4b59",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
