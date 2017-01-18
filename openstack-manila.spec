@@ -30,6 +30,7 @@ Source20:         manila-sudoers
 
 BuildArch:        noarch
 BuildRequires:    intltool
+BuildRequires:    openstack-macros
 BuildRequires:    python-d2to1
 BuildRequires:    python-oslo-sphinx
 BuildRequires:    python-pbr
