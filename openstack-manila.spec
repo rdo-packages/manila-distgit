@@ -375,3 +375,4 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/manila/commit/?id=c8ee9fba723973758cc6e45fea2b8cd6502af7ab
