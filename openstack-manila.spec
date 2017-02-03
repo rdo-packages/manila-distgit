@@ -75,9 +75,9 @@ Requires:         python-netaddr
 Requires:         python-lxml
 Requires:         python-anyjson
 Requires:         python-cheetah
-Requires:         python-requests >= 2.5.2
+Requires:         python-requests >= 2.10.0
 Requires:         python-retrying >= 1.2.3
-Requires:         python-stevedore >= 1.5.0
+Requires:         python-stevedore >= 1.17.1
 Requires:         python-suds
 Requires:         python-tooz >= 1.47.0
 
@@ -88,26 +88,26 @@ Requires:         python-paste-deploy
 Requires:         python-routes
 Requires:         python-webob
 
-Requires:         python-cinderclient
-Requires:         python-keystoneauth1
+Requires:         python-cinderclient >= 1.6.0
+Requires:         python-keystoneauth1 >= 2.18.0
 Requires:         python-keystoneclient
-Requires:         python-keystonemiddleware
-Requires:         python-neutronclient
-Requires:         python-novaclient >= 1:2.29.0
+Requires:         python-keystonemiddleware >= 4.12.0
+Requires:         python-neutronclient >= 5.1.0
+Requires:         python-novaclient >= 1:6.0.0
 
-Requires:         python-oslo-concurrency >= 3.5.0
-Requires:         python-oslo-config >= 3.7.0
-Requires:         python-oslo-context >= 0.2.0
-Requires:         python-oslo-db >= 4.1.0
+Requires:         python-oslo-concurrency >= 3.8.0
+Requires:         python-oslo-config >= 2:3.14.0
+Requires:         python-oslo-context >= 2.9.0
+Requires:         python-oslo-db >= 4.15.0
 Requires:         python-oslo-i18n >= 2.1.0
-Requires:         python-oslo-log
-Requires:         python-oslo-messaging >= 4.0.0
-Requires:         python-oslo-middleware
-Requires:         python-oslo-policy >= 0.5.0
-Requires:         python-oslo-rootwrap
+Requires:         python-oslo-log >= 3.11.0
+Requires:         python-oslo-messaging >= 5.14.0
+Requires:         python-oslo-middleware >= 3.0.0
+Requires:         python-oslo-policy >= 1.17.0
+Requires:         python-oslo-rootwrap >= 5.0.0
 Requires:         python-oslo-serialization >= 1.10.0
-Requires:         python-oslo-service
-Requires:         python-oslo-utils >= 3.5.0
+Requires:         python-oslo-service >= 1.10.0
+Requires:         python-oslo-utils >= 3.18.0
 
 # We need pbr at runtime because it deterimines the version seen in API.
 Requires:         python-pbr
