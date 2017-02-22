@@ -1,4 +1,3 @@
-%global milestone .0rc2
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
 
 ## N.B. For next release: in the past Manila's milestones didn't have a dot.
@@ -13,16 +12,12 @@ Name:             openstack-manila
 # https://review.openstack.org/#/q/I6a35fa0dda798fad93b804d00a46af80f08d475c,n,z
 Epoch:            1
 Version:          4.0.0
-Release:          0.2%{?milestone}%{?dist}
+Release:          1%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
 URL:              https://wiki.openstack.org/wiki/Manila
 Source0:          https://tarballs.openstack.org/manila/%{upstream_name}-%{version}%{?milestone}.tar.gz
-#
-# patches_base=4.0.0.0rc2
-#
-
 Source2:          manila.logrotate
 Source3:          manila-dist.conf
 
@@ -382,6 +377,9 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
+* Wed Feb 22 2017 Alfredo Moralejo <amoralej@redhat.com> 1:4.0.0-1
+- Update to 4.0.0
+
 * Fri Feb 17 2017 Alfredo Moralejo <amoralej@redhat.com> 1:4.0.0-0.2.0rc2
 - Update to 4.0.0.0rc2
 
