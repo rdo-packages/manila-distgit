@@ -318,6 +318,7 @@ getent passwd manila >/dev/null || \
 %systemd_postun_with_restart %{name}-share.service
 
 %files
+%{_bindir}/manila-wsgi
 %{_bindir}/manila-api
 %{_bindir}/manila-scheduler
 %{_bindir}/manila-data
@@ -377,4 +378,3 @@ getent passwd manila >/dev/null || \
 %endif
 
 %changelog
-# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/manila/commit/?id=c8ee9fba723973758cc6e45fea2b8cd6502af7ab
