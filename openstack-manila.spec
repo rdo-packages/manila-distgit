@@ -228,7 +228,6 @@ PYTHONPATH=. oslo-config-generator --config-file=etc/oslo-config-generator/manil
 %py2_entrypoint %{service} %{service}
 
 # docs generation requires everything to be installed first
-export PYTHONPATH="$( pwd ):$PYTHONPATH"
 
 pushd doc
 
