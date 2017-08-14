@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a890539_61885023",
+        "filename": "openstack-manila.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-08-14T11:30:51Z",
+      "side": 1,
+      "message": "Missing python-ipaddress",
+      "revId": "57d3c076bc8de12b73852770e389acd7abd91573",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
