@@ -38,7 +38,6 @@ BuildRequires:    intltool
 BuildRequires:    openstack-macros
 BuildRequires:    git
 BuildRequires:    python-d2to1
-BuildRequires:    python-oslo-sphinx
 BuildRequires:    python-pbr
 BuildRequires:    python-setuptools
 BuildRequires:    python-sphinx
@@ -234,23 +233,20 @@ PYTHONPATH=. oslo-config-generator --config-file=etc/oslo-config-generator/manil
 %py2_entrypoint %{service} %{service}
 
 # docs generation requires everything to be installed first
-
-pushd doc
-
 %if 0%{?with_doc}
-SPHINX_DEBUG=1 sphinx-build -b html source build/html
+%{__python2} setup.py build_sphinx -b html
 # Fix hidden-file-or-dir warnings
-rm -fr build/html/.doctrees build/html/.buildinfo
+rm -fr doc/build/html/.doctrees doc/build/html/.buildinfo
 %endif
 
-# Create dir link to avoid a sphinx-build exception
-mkdir -p build/man/.doctrees/
-ln -s .  build/man/.doctrees/man
-SPHINX_DEBUG=1 sphinx-build -b man -c source source/man build/man
-mkdir -p %{buildroot}%{_mandir}/man1
-install -p -D -m 644 build/man/*.1 %{buildroot}%{_mandir}/man1/
-
+# FIXME(jpena): Create dir link to avoid a sphinx-build exception
+# Can be removed after https://review.openstack.org/497761 is merged
+pushd doc/build/doctrees
+ln -s cli man
 popd
+%{__python2} setup.py build_sphinx -b man
+mkdir -p %{buildroot}%{_mandir}/man1
+install -p -D -m 644 doc/build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 # Setup directories
 install -d -m 755 %{buildroot}%{_sharedstatedir}/manila
