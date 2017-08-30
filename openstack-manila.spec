@@ -190,7 +190,7 @@ Group:            Documentation
 Requires:         %{name} = %{epoch}:%{version}-%{release}
 
 BuildRequires:    systemd-units
-#BuildRequires:    graphviz
+BuildRequires:    graphviz
 
 # Required to build module documents
 BuildRequires:    python-eventlet
