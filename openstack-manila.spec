@@ -38,6 +38,9 @@ BuildRequires:    intltool
 BuildRequires:    openstack-macros
 BuildRequires:    git
 BuildRequires:    python-d2to1
+# TODO: oslo-sphinx is removed in stable/pike but did not land in time for 5.0.0
+# Remove oslo-sphinx when the removal has been released
+BuildRequires:    python-oslo-sphinx
 BuildRequires:    python-pbr
 BuildRequires:    python-setuptools
 BuildRequires:    python-sphinx
