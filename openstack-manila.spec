@@ -5,6 +5,11 @@
 #global milestone rc2
 %global upstream_name manila
 
+%global common_desc \
+OpenStack Shared Filesystem Service (code-name Manila) provides services \
+to manage network filesystems for use by Virtual Machine instances.
+
+
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
 Name:             openstack-manila
@@ -55,8 +60,7 @@ Requires(pre):    shadow-utils
 Requires:         python-posix_ipc
 
 %description
-OpenStack Shared Filesystem Service (code-name Manila) provides services
-to manage network filesystems for use by Virtual Machine instances.
+%{common_desc}
 
 %package -n       python-manila
 Summary:          Python libraries for OpenStack Shared Filesystem Service
@@ -135,8 +139,7 @@ BuildRequires:    python-novaclient >= 1:9.0.0
 BuildRequires:    python-paramiko
 
 %description -n   python-manila
-OpenStack Shared Filesystem Service (code-name Manila) provides services
-to manage network filesystems for use by Virtual Machine instances.
+%{common_desc}
 
 This package contains the associated Python library.
 
@@ -157,8 +160,7 @@ Requires:         lvm2
 Requires:         samba
 
 %description -n   %{name}-share
-OpenStack Shared Filesystem Service (code-name Manila) provides services
-to manage network filesystems for use by Virtual Machine instances.
+%{common_desc}
 
 This package contains a reference implementation of a service that
 exports shares, similar to a filer.
@@ -168,8 +170,7 @@ Summary:        Manila tests
 Requires:       openstack-manila = %{epoch}:%{version}-%{release}
 
 %description -n python-manila-tests
-OpenStack Shared Filesystem Service (code-name Manila) provides services
-to manage network filesystems for use by Virtual Machine instances.
+%{common_desc}
 
 This package contains the Manila test files.
 
@@ -193,8 +194,7 @@ BuildRequires:    python-webob
 BuildRequires:    python-migrate, python-iso8601
 
 %description      doc
-OpenStack Shared Filesystem Service (code-name Manila) provides services
-to manage network filesystems for use by Virtual Machine instances.
+%{common_desc}
 
 This package contains the associated documentation.
 %endif
