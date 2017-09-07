@@ -234,13 +234,6 @@ PYTHONPATH=. oslo-config-generator --config-file=etc/oslo-config-generator/manil
 rm -fr doc/build/html/.doctrees doc/build/html/.buildinfo
 %endif
 
-%if 0%{?with_doc}
-# FIXME(jpena): Create dir link to avoid a sphinx-build exception
-# Can be removed after https://review.openstack.org/497761 is merged
-pushd doc/build/doctrees
-ln -s cli man
-popd
-%endif
 %{__python2} setup.py build_sphinx -b man
 mkdir -p %{buildroot}%{_mandir}/man1
 install -p -D -m 644 doc/build/man/*.1 %{buildroot}%{_mandir}/man1/
