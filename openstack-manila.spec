@@ -51,9 +51,7 @@ BuildRequires:    python-tooz
 
 Requires:         python-manila = %{epoch}:%{version}-%{release}
 
-Requires(post):   systemd
-Requires(preun):  systemd
-Requires(postun): systemd
+%{?systemd_requires}
 Requires(pre):    shadow-utils
 
 # We pull the posix_ipc with Oslo's common lockutils.
@@ -149,9 +147,7 @@ Group:            Applications/System
 
 Requires:         python-manila = %{epoch}:%{version}-%{release}
 
-Requires(post):   systemd-units
-Requires(preun):  systemd-units
-Requires(postun): systemd-units
+%{?systemd_requires}
 Requires(pre):    shadow-utils
 
 # The manila-share can create shares out of LVM slices.
