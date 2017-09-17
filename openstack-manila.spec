@@ -191,6 +191,7 @@ BuildRequires:    python-sqlalchemy
 BuildRequires:    python-webob
 # while not strictly required, quiets the build down when building docs.
 BuildRequires:    python-migrate, python-iso8601
+BuildRequires:    openstack-macros
 
 %description      doc
 %{common_desc}
@@ -207,7 +208,7 @@ find manila -name \*.py -exec sed -i '/\/usr\/bin\/env python/{d;q}' {} +
 
 # Remove the requirements file so that pbr hooks don't add it
 # to distutils requires_dist config
-rm -rf {test-,}requirements.txt tools/{pip,test}-requires
+%py_req_cleanup
 
 # FIXME avoid LXD dependency - real fix is to make drivers fully pluggable upstream
 sed -i '/lxd/ s/^/#/' manila/opts.py
