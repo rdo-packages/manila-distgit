@@ -74,7 +74,6 @@ Requires:         python-iso8601
 Requires:         python-netaddr
 Requires:         python-lxml
 Requires:         python-anyjson
-Requires:         python-cheetah
 Requires:         python-requests >= 2.10.0
 Requires:         python-retrying >= 1.2.3
 Requires:         python-stevedore >= 1.17.1
