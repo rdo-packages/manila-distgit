@@ -217,6 +217,11 @@ rm -rf {test-,}requirements.txt tools/{pip,test}-requires
 # FIXME avoid LXD dependency - real fix is to make drivers fully pluggable upstream
 sed -i '/lxd/ s/^/#/' manila/opts.py
 
+# disable warning-is-error, image install/common/figures/hwreqs.png is not included
+# in the tarball so it generates a warning when trying to create the doc. Until this
+# is fixed upstream, we need to disable warning-is-error
+sed -i 's/^warning-is-error.*/warning-is-error = 0/g' setup.cfg
+
 %build
 # Generate config file
 PYTHONPATH=. oslo-config-generator --config-file=etc/oslo-config-generator/manila.conf
