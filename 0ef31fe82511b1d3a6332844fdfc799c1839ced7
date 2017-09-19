@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a961159_1648b95a",
+        "filename": "openstack-manila.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 403
+      },
+      "writtenOn": "2017-09-19T04:11:34Z",
+      "side": 1,
+      "message": "Just adding the reason that i found, check comments on: https://trello.com/c/OhCZeLMO/641-migrate-to-sphinx-162-pbr-311-python-openstackdocstheme-1110",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 56
+      },
+      "revId": "0ef31fe82511b1d3a6332844fdfc799c1839ced7",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
