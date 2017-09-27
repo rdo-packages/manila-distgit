@@ -366,6 +366,7 @@ getent passwd %{service} >/dev/null || \
 
 %if 0%{?with_doc}
 %files doc
+%license LICENSE
 %doc doc/build/html
 %endif
 
