@@ -365,6 +365,7 @@ getent passwd %{service} >/dev/null || \
 %{_unitdir}/%{name}-share.service
 
 %if 0%{?with_doc}
+%license LICENSE
 %files doc
 %doc doc/build/html
 %endif
