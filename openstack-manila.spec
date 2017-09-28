@@ -246,13 +246,13 @@ install -d -m 755 %{buildroot}%{_localstatedir}/log/%{service}
 install -d -m 755 %{buildroot}%{_sysconfdir}/%{service}
 install -p -D -m 640 etc/%{service}/%{service}.conf.sample %{buildroot}%{_sysconfdir}/%{service}/%{service}.conf
 install -p -D -m 644 %{SOURCE3} %{buildroot}%{_datadir}/%{service}/%{service}-dist.conf
-install -p -D -m 640 etc/%{service}/rootwrap.conf %{buildroot}%{_sysconfdir}/%{service}/rootwrap.conf
+mv %{buildroot}%{_prefix}/etc/%{service}/rootwrap.conf %{buildroot}%{_sysconfdir}/%{service}/rootwrap.conf
 # XXX We want to set signing_dir to /var/lib/manila/keystone-signing,
 # but there's apparently no way to override the value in api-paste.ini
 # from manila.conf. So we keep a forked api-paste.ini around for now.
 #install -p -D -m 640 etc/manila/api-paste.ini %{buildroot}%{_sysconfdir}/manila/api-paste.ini
-install -p -D -m 640 etc/%{service}/api-paste.ini %{buildroot}%{_sysconfdir}/%{service}/api-paste.ini
-install -p -D -m 640 etc/%{service}/policy.json %{buildroot}%{_sysconfdir}/%{service}/policy.json
+mv %{buildroot}%{_prefix}/etc/%{service}/api-paste.ini %{buildroot}%{_sysconfdir}/%{service}/api-paste.ini
+mv %{buildroot}%{_prefix}/etc/%{service}/policy.json %{buildroot}%{_sysconfdir}/%{service}/policy.json
 
 # Install initscripts for services
 install -p -D -m 644 %{SOURCE10} %{buildroot}%{_unitdir}/%{name}-api.service
@@ -271,8 +271,11 @@ install -d -m 755 %{buildroot}%{_localstatedir}/run/%{service}
 
 # Install rootwrap files in /usr/share/manila/rootwrap
 mkdir -p %{buildroot}%{_datadir}/%{service}/rootwrap/
-install -p -D -m 644 etc/%{service}/rootwrap.d/* %{buildroot}%{_datadir}/%{service}/rootwrap/
+mv %{buildroot}%{_prefix}/etc/%{service}/rootwrap.d/* %{buildroot}%{_datadir}/%{service}/rootwrap/
 
+# Remove duplicate config directory /usr/etc/manila, /usr/etc/manila/rootwrap.d,
+# we are keeping config files at /etc/manila and rootwrap files at /usr/share/manila/rootwrap
+rmdir %{buildroot}%{_prefix}/etc/%{service}/rootwrap.d %{buildroot}%{_prefix}/etc/%{service}
 # Install tempest tests files
 cp -r %{service}_tempest_tests %{buildroot}%{python2_sitelib}/%{service}_tempest_tests
 
