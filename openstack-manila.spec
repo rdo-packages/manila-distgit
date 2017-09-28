@@ -40,9 +40,7 @@ BuildRequires:    git
 BuildRequires:    python-d2to1
 BuildRequires:    python-pbr
 BuildRequires:    python-setuptools
-BuildRequires:    python-sphinx
 BuildRequires:    python2-devel
-BuildRequires:    python-openstackdocstheme
 BuildRequires:    python-mock
 BuildRequires:    python-oslotest
 BuildRequires:    python-lxml
@@ -181,13 +179,14 @@ BuildRequires:    systemd-units
 BuildRequires:    graphviz
 
 # Required to build module documents
+BuildRequires:    python-sphinx
+BuildRequires:    python-openstackdocstheme
 BuildRequires:    python-eventlet
 BuildRequires:    python-routes
 BuildRequires:    python-sqlalchemy
 BuildRequires:    python-webob
 # while not strictly required, quiets the build down when building docs.
 BuildRequires:    python-migrate, python-iso8601
-BuildRequires:    openstack-macros
 
 %description      doc
 %{common_desc}
