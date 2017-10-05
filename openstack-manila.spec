@@ -162,6 +162,9 @@ exports shares, similar to a filer.
 Summary:        Manila tests
 Requires:       openstack-%{service} = %{epoch}:%{version}-%{release}
 
+# ddt is a runtime dependency of various tests
+Requires:    python-ddt
+
 %description -n python-%{service}-tests
 %{common_desc}
 
