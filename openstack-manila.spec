@@ -171,6 +171,9 @@ exports shares, similar to a filer.
 Summary:        Manila tests
 Requires:       openstack-manila = %{epoch}:%{version}-%{release}
 
+# ddt is a runtime dependency of various tests
+Requires:    python-ddt
+
 %description -n python-manila-tests
 OpenStack Shared Filesystem Service (code-name Manila) provides services
 to manage network filesystems for use by Virtual Machine instances.
