@@ -260,7 +260,7 @@ mv %{buildroot}%{_prefix}/etc/%{service}/policy.json %{buildroot}%{_sysconfdir}/
 install -p -D -m 644 %{SOURCE10} %{buildroot}%{_unitdir}/%{name}-api.service
 install -p -D -m 644 %{SOURCE11} %{buildroot}%{_unitdir}/%{name}-scheduler.service
 install -p -D -m 644 %{SOURCE12} %{buildroot}%{_unitdir}/%{name}-share.service
-install -p -D -m 644 %{SOURCE12} %{buildroot}%{_unitdir}/%{name}-data.service
+install -p -D -m 644 %{SOURCE13} %{buildroot}%{_unitdir}/%{name}-data.service
 
 # Install sudoers
 install -p -D -m 440 %{SOURCE20} %{buildroot}%{_sysconfdir}/sudoers.d/%{service}
