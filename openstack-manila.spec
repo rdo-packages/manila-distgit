@@ -116,7 +116,6 @@ Requires:         python-pbr
 Requires:         python-six >= 1.9.0
 
 Requires:         python-babel
-Requires:         python-lockfile
 Requires:         pyparsing >= 2.0.1
 
 # Config file generation dependencies
