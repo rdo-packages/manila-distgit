@@ -46,6 +46,9 @@ BuildRequires:    python-oslotest
 BuildRequires:    python-lxml
 BuildRequires:    python-ddt
 BuildRequires:    python-tooz
+# Required to build manpages and html documents
+BuildRequires:    python-sphinx
+BuildRequires:    python-openstackdocstheme
 
 Requires:         python-%{service} = %{epoch}:%{version}-%{release}
 
@@ -181,8 +184,6 @@ BuildRequires:    systemd-units
 BuildRequires:    graphviz
 
 # Required to build module documents
-BuildRequires:    python-sphinx
-BuildRequires:    python-openstackdocstheme
 BuildRequires:    python-eventlet
 BuildRequires:    python-routes
 BuildRequires:    python-sqlalchemy
