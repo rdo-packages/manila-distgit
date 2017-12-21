@@ -224,9 +224,6 @@ PYTHONPATH=. oslo-config-generator --config-file=etc/oslo-config-generator/%{ser
 %install
 %{__python2} setup.py install -O1 --skip-build --root %{buildroot}
 
-# Create fake egg-info for the tempest plugin
-%py2_entrypoint %{service} %{service}
-
 # docs generation requires everything to be installed first
 %if 0%{?with_doc}
 %{__python2} setup.py build_sphinx -b html
@@ -276,8 +273,6 @@ mv %{buildroot}%{_prefix}/etc/%{service}/rootwrap.d/* %{buildroot}%{_datadir}/%{
 # Remove duplicate config directory /usr/etc/manila, /usr/etc/manila/rootwrap.d,
 # we are keeping config files at /etc/manila and rootwrap files at /usr/share/manila/rootwrap
 rmdir %{buildroot}%{_prefix}/etc/%{service}/rootwrap.d %{buildroot}%{_prefix}/etc/%{service}
-# Install tempest tests files
-cp -r %{service}_tempest_tests %{buildroot}%{python2_sitelib}/%{service}_tempest_tests
 
 # Remove files unneeded in production
 rm -f %{buildroot}%{_bindir}/%{service}-all
@@ -350,7 +345,6 @@ getent passwd %{service} >/dev/null || \
 
 %{python2_sitelib}/%{service}
 %{python2_sitelib}/%{service}-%{version}*.egg-info
-%exclude %{python2_sitelib}/%{service}_tempest_tests
 %exclude %{python2_sitelib}/%{service}/tests
 
 %{_bindir}/%{service}-manage
@@ -358,9 +352,7 @@ getent passwd %{service} >/dev/null || \
 
 %files -n python-%{service}-tests
 %license LICENSE
-%{python2_sitelib}/%{service}_tempest_tests
 %{python2_sitelib}/%{service}/tests
-%{python2_sitelib}/%{service}_tests.egg-info
 
 %files -n %{name}-share
 %{_bindir}/%{service}-share
