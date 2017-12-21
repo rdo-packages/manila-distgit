@@ -253,7 +253,6 @@ mv %{buildroot}%{_prefix}/etc/%{service}/rootwrap.conf %{buildroot}%{_sysconfdir
 # from manila.conf. So we keep a forked api-paste.ini around for now.
 #install -p -D -m 640 etc/manila/api-paste.ini %{buildroot}%{_sysconfdir}/manila/api-paste.ini
 mv %{buildroot}%{_prefix}/etc/%{service}/api-paste.ini %{buildroot}%{_sysconfdir}/%{service}/api-paste.ini
-mv %{buildroot}%{_prefix}/etc/%{service}/policy.json %{buildroot}%{_sysconfdir}/%{service}/policy.json
 
 # Install initscripts for services
 install -p -D -m 644 %{SOURCE10} %{buildroot}%{_unitdir}/%{name}-api.service
@@ -336,7 +335,6 @@ getent passwd %{service} >/dev/null || \
 %config(noreplace) %attr(-, root, %{service}) %{_sysconfdir}/%{service}/%{service}.conf
 %config(noreplace) %attr(-, root, %{service}) %{_sysconfdir}/%{service}/api-paste.ini
 %config(noreplace) %attr(-, root, %{service}) %{_sysconfdir}/%{service}/rootwrap.conf
-%config(noreplace) %attr(-, root, %{service}) %{_sysconfdir}/%{service}/policy.json
 %config(noreplace) %{_sysconfdir}/logrotate.d/openstack-%{service}
 %config(noreplace) %{_sysconfdir}/sudoers.d/%{service}
 
