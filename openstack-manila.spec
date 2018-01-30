@@ -180,7 +180,7 @@ Group:            Documentation
 
 Requires:         %{name} = %{epoch}:%{version}-%{release}
 
-BuildRequires:    systemd-units
+BuildRequires:    systemd
 BuildRequires:    graphviz
 
 # Required to build module documents
