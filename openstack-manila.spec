@@ -38,17 +38,17 @@ BuildRequires:    intltool
 BuildRequires:    openstack-macros
 BuildRequires:    git
 BuildRequires:    python-d2to1
-BuildRequires:    python-pbr
-BuildRequires:    python-setuptools
+BuildRequires:    python2-pbr
+BuildRequires:    python2-setuptools
 BuildRequires:    python2-devel
-BuildRequires:    python-mock
-BuildRequires:    python-oslotest
+BuildRequires:    python2-mock
+BuildRequires:    python2-oslotest
 BuildRequires:    python-lxml
-BuildRequires:    python-ddt
-BuildRequires:    python-tooz
+BuildRequires:    python2-ddt
+BuildRequires:    python2-tooz
 # Required to build manpages and html documents
-BuildRequires:    python-sphinx
-BuildRequires:    python-openstackdocstheme
+BuildRequires:    python2-sphinx
+BuildRequires:    python2-openstackdocstheme
 
 Requires:         python-%{service} = %{epoch}:%{version}-%{release}
 
@@ -68,72 +68,71 @@ Group:            Applications/System
 # Rootwrap in 2013.2 and later deprecates anything but sudo.
 Requires:         sudo
 
-Requires:         python-paramiko
+Requires:         python2-paramiko
 
-Requires:         python-alembic
-Requires:         python-eventlet
-Requires:         python-greenlet
+Requires:         python2-alembic
+Requires:         python2-eventlet
+Requires:         python2-greenlet
 Requires:         python-ipaddress
-Requires:         python-iso8601
-Requires:         python-netaddr
+Requires:         python2-netaddr
 Requires:         python-lxml
-Requires:         python-anyjson
-Requires:         python-requests >= 2.10.0
+Requires:         python2-anyjson
+Requires:         python2-requests >= 2.14.2
 Requires:         python-retrying >= 1.2.3
-Requires:         python-stevedore >= 1.20.0
-Requires:         python-suds
-Requires:         python-tooz >= 1.47.0
+Requires:         python2-stevedore >= 1.20.0
+Requires:         python2-suds
+Requires:         python2-tooz >= 1.58.0
 
-Requires:         python-sqlalchemy
+Requires:         python2-sqlalchemy
 Requires:         python-migrate
 
 Requires:         python-paste-deploy
-Requires:         python-routes
+Requires:         python2-routes
 Requires:         python-webob
 
-Requires:         python-cinderclient >= 3.1.0
-Requires:         python-keystoneauth1 >= 3.1.0
-Requires:         python-keystoneclient
-Requires:         python-keystonemiddleware >= 4.12.0
-Requires:         python-neutronclient >= 6.3.0
-Requires:         python-novaclient >= 1:9.0.0
+Requires:         python2-cinderclient >= 3.3.0
+Requires:         python2-keystoneauth1 >= 3.3.0
+Requires:         python2-keystoneclient
+Requires:         python2-keystonemiddleware >= 4.17.0
+Requires:         python2-neutronclient >= 6.3.0
+Requires:         python2-novaclient >= 9.1.0
 
-Requires:         python-oslo-concurrency >= 3.8.0
-Requires:         python-oslo-config >= 2:4.0.0
-Requires:         python-oslo-context >= 2.14.0
-Requires:         python-oslo-db >= 4.24.0
-Requires:         python-oslo-i18n >= 2.1.0
-Requires:         python-oslo-log >= 3.22.0
-Requires:         python-oslo-messaging >= 5.24.2
-Requires:         python-oslo-middleware >= 3.27.0
-Requires:         python-oslo-policy >= 1.23.0
-Requires:         python-oslo-reports >= 0.6.0
-Requires:         python-oslo-rootwrap >= 5.0.0
-Requires:         python-oslo-serialization >= 1.10.0
-Requires:         python-oslo-service >= 1.10.0
-Requires:         python-oslo-utils >= 3.20.0
+Requires:         python2-oslo-concurrency >= 3.25.0
+Requires:         python2-oslo-config >= 2:5.1.0
+Requires:         python2-oslo-context >= 2.19.2
+Requires:         python2-oslo-db >= 4.27.0
+Requires:         python2-oslo-i18n >= 3.15.3
+Requires:         python2-oslo-log >= 3.36.0
+Requires:         python2-oslo-messaging >= 5.29.0
+Requires:         python2-oslo-middleware >= 3.31.0
+Requires:         python2-oslo-policy >= 1.30.0
+Requires:         python2-oslo-reports >= 1.18.0
+Requires:         python2-oslo-rootwrap >= 5.8.0
+Requires:         python2-oslo-serialization >= 2.18.0
+Requires:         python2-oslo-service >= 1.24.0
+Requires:         python2-oslo-utils >= 3.33.0
 
 # We need pbr at runtime because it deterimines the version seen in API.
-Requires:         python-pbr
+Requires:         python2-pbr
 
-Requires:         python-six >= 1.9.0
+Requires:         python2-six >= 1.10.0
 
-Requires:         python-babel
-Requires:         pyparsing >= 2.0.1
+Requires:         python2-babel
+Requires:         python2-pyparsing >= 2.1.0
 
 # Config file generation dependencies
-BuildRequires:    python-oslo-config >= 4.0.0
-BuildRequires:    python-oslo-concurrency >= 3.8.0
-BuildRequires:    python-oslo-db >= 4.24.0
-BuildRequires:    python-oslo-messaging >= 5.24.2
-BuildRequires:    python-oslo-middleware
-BuildRequires:    python-oslo-policy >= 1.23.0
-BuildRequires:    python-keystoneauth1
-BuildRequires:    python-keystonemiddleware
-BuildRequires:    python-cinderclient
-BuildRequires:    python-neutronclient
-BuildRequires:    python-novaclient >= 1:9.0.0
-BuildRequires:    python-paramiko
+BuildRequires:    python2-oslo-config >= 2:5.1.0
+BuildRequires:    python2-oslo-concurrency >= 3.25.0
+BuildRequires:    python2-oslo-db >= 4.27.0
+BuildRequires:    python2-oslo-messaging >= 5.29.0
+BuildRequires:    python2-oslo-middleware
+BuildRequires:    python2-oslo-policy >= 1.30.0
+BuildRequires:    python2-keystoneauth1
+BuildRequires:    python2-keystonemiddleware
+BuildRequires:    python2-cinderclient
+BuildRequires:    python2-neutronclient
+BuildRequires:    python2-novaclient >= 9.1.0
+BuildRequires:    python2-paramiko
 
 %description -n   python-%{service}
 %{common_desc}
@@ -165,7 +164,7 @@ Summary:        Manila tests
 Requires:       openstack-%{service} = %{epoch}:%{version}-%{release}
 
 # ddt is a runtime dependency of various tests
-Requires:    python-ddt
+Requires:    python2-ddt
 
 %description -n python-%{service}-tests
 %{common_desc}
@@ -184,12 +183,12 @@ BuildRequires:    systemd
 BuildRequires:    graphviz
 
 # Required to build module documents
-BuildRequires:    python-eventlet
-BuildRequires:    python-routes
-BuildRequires:    python-sqlalchemy
+BuildRequires:    python2-eventlet
+BuildRequires:    python2-routes
+BuildRequires:    python2-sqlalchemy
 BuildRequires:    python-webob
 # while not strictly required, quiets the build down when building docs.
-BuildRequires:    python-migrate, python-iso8601
+BuildRequires:    python-migrate, python2-iso8601
 
 %description      doc
 %{common_desc}
