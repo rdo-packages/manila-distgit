@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aaa499b_e508052b",
+        "filename": "openstack-manila.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 403
+      },
+      "writtenOn": "2018-02-12T13:42:56Z",
+      "side": 1,
+      "message": "we missed creating python2- packaging in https://review.rdoproject.org/r/#/c/11741",
+      "range": {
+        "startLine": 48,
+        "startChar": 18,
+        "endLine": 48,
+        "endChar": 30
+      },
+      "revId": "051760a595dbe9e717bd50addbadece1abe4f2f9",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
