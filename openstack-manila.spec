@@ -1,4 +1,3 @@
-%global milestone .0rc3
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
 %global service manila
 
@@ -18,14 +17,12 @@ Name:             openstack-%{service}
 # https://review.openstack.org/#/q/I6a35fa0dda798fad93b804d00a46af80f08d475c,n,z
 Epoch:            1
 Version:          6.0.0
-Release:          0.3%{?milestone}%{?dist}
+Release:          1%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
 URL:              https://wiki.openstack.org/wiki/Manila
 Source0:          https://tarballs.openstack.org/%{service}/%{service}-%{version}%{?milestone}.tar.gz
-#
-# patches_base=6.0.0.0rc3
 #
 
 Source2:          %{service}.logrotate
@@ -369,6 +366,9 @@ getent passwd %{service} >/dev/null || \
 %endif
 
 %changelog
+* Wed Feb 28 2018 RDO <dev@lists.rdoproject.org> 1:6.0.0-1
+- Update to 6.0.0
+
 * Thu Feb 22 2018 RDO <dev@lists.rdoproject.org> 1:6.0.0-0.3.0rc2
 - Update to 6.0.0.0rc3
 
