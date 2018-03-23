@@ -226,12 +226,12 @@ PYTHONPATH=. oslo-config-generator --config-file=etc/oslo-config-generator/%{ser
 
 # docs generation requires everything to be installed first
 %if 0%{?with_doc}
-%{__python2} setup.py build_sphinx -b html
+sphinx-build -b html doc/source doc/build/html
 # Fix hidden-file-or-dir warnings
 rm -fr doc/build/html/.doctrees doc/build/html/.buildinfo
 %endif
 
-%{__python2} setup.py build_sphinx -b man
+sphinx-build -b man doc/source doc/build/man
 mkdir -p %{buildroot}%{_mandir}/man1
 install -p -D -m 644 doc/build/man/*.1 %{buildroot}%{_mandir}/man1/
 
