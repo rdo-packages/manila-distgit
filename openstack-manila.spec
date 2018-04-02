@@ -91,14 +91,14 @@ Requires:         python2-routes
 Requires:         python-webob
 
 Requires:         python2-cinderclient >= 3.3.0
-Requires:         python2-keystoneauth1 >= 3.3.0
+Requires:         python2-keystoneauth1 >= 3.4.0
 Requires:         python2-keystoneclient
 Requires:         python2-keystonemiddleware >= 4.17.0
-Requires:         python2-neutronclient >= 6.3.0
+Requires:         python2-neutronclient >= 6.7.0
 Requires:         python2-novaclient >= 9.1.0
 
-Requires:         python2-oslo-concurrency >= 3.25.0
-Requires:         python2-oslo-config >= 2:5.1.0
+Requires:         python2-oslo-concurrency >= 3.26.0
+Requires:         python2-oslo-config >= 2:5.2.0
 Requires:         python2-oslo-context >= 2.19.2
 Requires:         python2-oslo-db >= 4.27.0
 Requires:         python2-oslo-i18n >= 3.15.3
