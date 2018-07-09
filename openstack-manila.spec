@@ -160,7 +160,7 @@ This package contains a reference implementation of a service that
 exports shares, similar to a filer.
 
 %package -n python-%{service}-tests
-Summary:        Manila tests
+Summary:        Unit tests for the OpenStack Shared Filesystem Service
 Requires:       openstack-%{service} = %{epoch}:%{version}-%{release}
 
 # ddt is a runtime dependency of various tests
