@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9abe1de1_31872db7",
+        "filename": "openstack-manila.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-24T08:44:44Z",
+      "side": 1,
+      "message": "missing -%{service}-",
+      "range": {
+        "startLine": 205,
+        "startChar": 30,
+        "endLine": 205,
+        "endChar": 31
+      },
+      "revId": "edab15fd0c7056cb7e80296d3b300d3e83afc03d",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
