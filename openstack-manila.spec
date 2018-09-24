@@ -1,3 +1,14 @@
+# Macros for py2/py3 compatibility
+%if 0%{?fedora} || 0%{?rhel} > 7
+%global pyver %{python3_pkgversion}
+%else
+%global pyver 2
+%endif
+%global pyver_bin python%{pyver}
+%global pyver_sitelib %python%{pyver}_sitelib
+%global pyver_install %py%{pyver}_install
+%global pyver_build %py%{pyver}_build
+# End of macros for py2/py3 compatibility
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
 %global service manila
 
@@ -37,104 +48,128 @@ BuildArch:        noarch
 BuildRequires:    intltool
 BuildRequires:    openstack-macros
 BuildRequires:    git
-BuildRequires:    python-d2to1
-BuildRequires:    python2-pbr
-BuildRequires:    python2-setuptools
-BuildRequires:    python2-devel
-BuildRequires:    python2-mock
-BuildRequires:    python2-oslotest
-BuildRequires:    python-lxml
-BuildRequires:    python2-ddt
-BuildRequires:    python2-tooz
+BuildRequires:    python%{pyver}-pbr
+BuildRequires:    python%{pyver}-setuptools
+BuildRequires:    python%{pyver}-devel
+BuildRequires:    python%{pyver}-mock
+BuildRequires:    python%{pyver}-oslotest
+BuildRequires:    python%{pyver}-ddt
+BuildRequires:    python%{pyver}-tooz
 # Required to build manpages and html documents
-BuildRequires:    python2-sphinx
-BuildRequires:    python2-openstackdocstheme
+BuildRequires:    python%{pyver}-sphinx
+BuildRequires:    python%{pyver}-openstackdocstheme
 
-Requires:         python-%{service} = %{epoch}:%{version}-%{release}
+%if %{pyver} == 2
+BuildRequires:    python-d2to1
+BuildRequires:    python-lxml
+%else
+BuildRequires:    python%{pyver}-d2to1
+BuildRequires:    python%{pyver}-lxml
+%endif
+
+Requires:         python%{pyver}-%{service} = %{epoch}:%{version}-%{release}
 
 %{?systemd_requires}
 Requires(pre):    shadow-utils
 
 # We pull the posix_ipc with Oslo's common lockutils.
+# Handle python2 exception
+%if %{pyver} == 2
 Requires:         python-posix_ipc
+%else
+Requires:         python%{pyver}-posix_ipc
+%endif
 
 %description
 %{common_desc}
 
-%package -n       python-%{service}
+%package -n       python%{pyver}-%{service}
 Summary:          Python libraries for OpenStack Shared Filesystem Service
+%{?python_provide:%python_provide python%{pyver}-%{service}}
 Group:            Applications/System
 
 # Rootwrap in 2013.2 and later deprecates anything but sudo.
 Requires:         sudo
 
-Requires:         python2-paramiko
+Requires:         python%{pyver}-paramiko
 
-Requires:         python2-alembic
-Requires:         python2-eventlet
-Requires:         python2-greenlet
-Requires:         python-ipaddress
-Requires:         python2-netaddr
-Requires:         python-lxml
-Requires:         python-anyjson
-Requires:         python2-requests >= 2.14.2
-Requires:         python-retrying >= 1.2.3
-Requires:         python2-stevedore >= 1.20.0
-Requires:         python2-suds
-Requires:         python2-tooz >= 1.58.0
+Requires:         python%{pyver}-alembic
+Requires:         python%{pyver}-eventlet
+Requires:         python%{pyver}-greenlet
+Requires:         python%{pyver}-netaddr
+Requires:         python%{pyver}-requests >= 2.14.2
+Requires:         python%{pyver}-stevedore >= 1.20.0
+Requires:         python%{pyver}-suds
+Requires:         python%{pyver}-tooz >= 1.58.0
 
-Requires:         python2-sqlalchemy
-Requires:         python-migrate
+Requires:         python%{pyver}-sqlalchemy
 
-Requires:         python-paste-deploy
-Requires:         python2-routes
-Requires:         python-webob
+Requires:         python%{pyver}-routes
+Requires:         python%{pyver}-webob
 
-Requires:         python2-cinderclient >= 3.3.0
-Requires:         python2-keystoneauth1 >= 3.4.0
-Requires:         python2-keystoneclient
-Requires:         python2-keystonemiddleware >= 4.17.0
-Requires:         python2-neutronclient >= 6.7.0
-Requires:         python2-novaclient >= 9.1.0
+Requires:         python%{pyver}-cinderclient >= 3.3.0
+Requires:         python%{pyver}-keystoneauth1 >= 3.4.0
+Requires:         python%{pyver}-keystoneclient
+Requires:         python%{pyver}-keystonemiddleware >= 4.17.0
+Requires:         python%{pyver}-neutronclient >= 6.7.0
+Requires:         python%{pyver}-novaclient >= 9.1.0
 
-Requires:         python2-oslo-concurrency >= 3.26.0
-Requires:         python2-oslo-config >= 2:5.2.0
-Requires:         python2-oslo-context >= 2.19.2
-Requires:         python2-oslo-db >= 4.27.0
-Requires:         python2-oslo-i18n >= 3.15.3
-Requires:         python2-oslo-log >= 3.36.0
-Requires:         python2-oslo-messaging >= 5.29.0
-Requires:         python2-oslo-middleware >= 3.31.0
-Requires:         python2-oslo-policy >= 1.30.0
-Requires:         python2-oslo-reports >= 1.18.0
-Requires:         python2-oslo-rootwrap >= 5.8.0
-Requires:         python2-oslo-serialization >= 2.18.0
-Requires:         python2-oslo-service >= 1.24.0
-Requires:         python2-oslo-utils >= 3.33.0
+Requires:         python%{pyver}-oslo-concurrency >= 3.26.0
+Requires:         python%{pyver}-oslo-config >= 2:5.2.0
+Requires:         python%{pyver}-oslo-context >= 2.19.2
+Requires:         python%{pyver}-oslo-db >= 4.27.0
+Requires:         python%{pyver}-oslo-i18n >= 3.15.3
+Requires:         python%{pyver}-oslo-log >= 3.36.0
+Requires:         python%{pyver}-oslo-messaging >= 5.29.0
+Requires:         python%{pyver}-oslo-middleware >= 3.31.0
+Requires:         python%{pyver}-oslo-policy >= 1.30.0
+Requires:         python%{pyver}-oslo-reports >= 1.18.0
+Requires:         python%{pyver}-oslo-rootwrap >= 5.8.0
+Requires:         python%{pyver}-oslo-serialization >= 2.18.0
+Requires:         python%{pyver}-oslo-service >= 1.24.0
+Requires:         python%{pyver}-oslo-utils >= 3.33.0
 
 # We need pbr at runtime because it deterimines the version seen in API.
-Requires:         python2-pbr
+Requires:         python%{pyver}-pbr
 
-Requires:         python2-six >= 1.10.0
+Requires:         python%{pyver}-six >= 1.10.0
 
-Requires:         python2-babel
-Requires:         python2-pyparsing >= 2.1.0
+Requires:         python%{pyver}-babel
+Requires:         python%{pyver}-pyparsing >= 2.1.0
+
+# Handle python2 exception
+%if %{pyver} == 2
+Requires:         python-posix_ipc
+Requires:         python-ipaddress
+Requires:         python-lxml
+Requires:         python-anyjson
+Requires:         python-retrying >= 1.2.3
+Requires:         python-migrate
+Requires:         python-paste-deploy
+%else
+Requires:         python%{pyver}-posix_ipc
+Requires:         python%{pyver}-lxml
+Requires:         python%{pyver}-anyjson
+Requires:         python%{pyver}-retrying >= 1.2.3
+Requires:         python%{pyver}-migrate
+Requires:         python%{pyver}-paste-deploy
+%endif
 
 # Config file generation dependencies
-BuildRequires:    python2-oslo-config >= 2:5.1.0
-BuildRequires:    python2-oslo-concurrency >= 3.25.0
-BuildRequires:    python2-oslo-db >= 4.27.0
-BuildRequires:    python2-oslo-messaging >= 5.29.0
-BuildRequires:    python2-oslo-middleware
-BuildRequires:    python2-oslo-policy >= 1.30.0
-BuildRequires:    python2-keystoneauth1
-BuildRequires:    python2-keystonemiddleware
-BuildRequires:    python2-cinderclient
-BuildRequires:    python2-neutronclient
-BuildRequires:    python2-novaclient >= 9.1.0
-BuildRequires:    python2-paramiko
+BuildRequires:    python%{pyver}-oslo-config >= 2:5.1.0
+BuildRequires:    python%{pyver}-oslo-concurrency >= 3.25.0
+BuildRequires:    python%{pyver}-oslo-db >= 4.27.0
+BuildRequires:    python%{pyver}-oslo-messaging >= 5.29.0
+BuildRequires:    python%{pyver}-oslo-middleware
+BuildRequires:    python%{pyver}-oslo-policy >= 1.30.0
+BuildRequires:    python%{pyver}-keystoneauth1
+BuildRequires:    python%{pyver}-keystonemiddleware
+BuildRequires:    python%{pyver}-cinderclient
+BuildRequires:    python%{pyver}-neutronclient
+BuildRequires:    python%{pyver}-novaclient >= 9.1.0
+BuildRequires:    python%{pyver}-paramiko
 
-%description -n   python-%{service}
+%description -n   python%{pyver}-%{service}
 %{common_desc}
 
 This package contains the associated Python library.
@@ -143,7 +178,7 @@ This package contains the associated Python library.
 Summary:          An implementation of OpenStack Shared Filesystem Service
 Group:            Applications/System
 
-Requires:         python-%{service} = %{epoch}:%{version}-%{release}
+Requires:         python%{pyver}-%{service} = %{epoch}:%{version}-%{release}
 
 %{?systemd_requires}
 Requires(pre):    shadow-utils
@@ -159,14 +194,15 @@ Requires:         samba
 This package contains a reference implementation of a service that
 exports shares, similar to a filer.
 
-%package -n python-%{service}-tests
+%package -n python%{pyver}-%{service}-tests
 Summary:        Unit tests for the OpenStack Shared Filesystem Service
+%{?python_provide:%python_provide python%{pyver}-%{service}-tests}
 Requires:       openstack-%{service} = %{epoch}:%{version}-%{release}
 
 # ddt is a runtime dependency of various tests
-Requires:    python2-ddt
+Requires:    python%{pyver}-ddt
 
-%description -n python-%{service}-tests
+%description -n python%{pyver}-%{service}-tests
 %{common_desc}
 
 This package contains the Manila test files.
@@ -183,12 +219,18 @@ BuildRequires:    systemd
 BuildRequires:    graphviz
 
 # Required to build module documents
-BuildRequires:    python2-eventlet
-BuildRequires:    python2-routes
-BuildRequires:    python2-sqlalchemy
-BuildRequires:    python-webob
+BuildRequires:    python%{pyver}-eventlet
+BuildRequires:    python%{pyver}-routes
+BuildRequires:    python%{pyver}-sqlalchemy
+BuildRequires:    python%{pyver}-webob
 # while not strictly required, quiets the build down when building docs.
-BuildRequires:    python-migrate, python2-iso8601
+BuildRequires:    python%{pyver}-iso8601
+
+%if %{pyver} == 2
+BuildRequires:    python-migrate
+%else
+BuildRequires:    python%{pyver}-migrate
+%endif
 
 %description      doc
 %{common_desc}
@@ -217,21 +259,21 @@ sed -i 's/^warning-is-error.*/warning-is-error = 0/g' setup.cfg
 
 %build
 # Generate config file
-PYTHONPATH=. oslo-config-generator --config-file=etc/oslo-config-generator/%{service}.conf
+PYTHONPATH=. oslo-config-generator-%{pyver} --config-file=etc/oslo-config-generator-%{pyver}/%{service}.conf
 
-%{__python2} setup.py build
+%{pyver_build}
 
 %install
-%{__python2} setup.py install -O1 --skip-build --root %{buildroot}
+%{pyver_install}
 
 # docs generation requires everything to be installed first
 %if 0%{?with_doc}
-sphinx-build -b html doc/source doc/build/html
+sphinx-build-%{pyver} -b html doc/source doc/build/html
 # Fix hidden-file-or-dir warnings
 rm -fr doc/build/html/.doctrees doc/build/html/.buildinfo
 %endif
 
-sphinx-build -b man doc/source doc/build/man
+sphinx-build-%{pyver} -b man doc/source doc/build/man
 mkdir -p %{buildroot}%{_mandir}/man1
 install -p -D -m 644 doc/build/man/*.1 %{buildroot}%{_mandir}/man1/
 
@@ -277,7 +319,7 @@ rmdir %{buildroot}%{_prefix}/etc/%{service}/rootwrap.d %{buildroot}%{_prefix}/et
 # Remove files unneeded in production
 rm -f %{buildroot}%{_bindir}/%{service}-all
 
-%pre -n python-%{service}
+%pre -n python%{pyver}-%{service}
 getent group %{service} >/dev/null || groupadd -r %{service}
 getent passwd %{service} >/dev/null || \
    useradd -r -g %{service} -G %{service},nobody -d %{_sharedstatedir}/%{service} \
@@ -321,7 +363,7 @@ getent passwd %{service} >/dev/null || \
 %dir %{_sharedstatedir}/%{service}
 %dir %{_sharedstatedir}/%{service}/tmp
 
-%files -n python-%{service}
+%files -n python%{pyver}-%{service}
 %license LICENSE
 
 # Aww, this is awkward. The python-manila itself does not need or provide
@@ -343,16 +385,16 @@ getent passwd %{service} >/dev/null || \
 %dir %attr(0750, %{service}, root) %{_localstatedir}/log/%{service}
 %dir %attr(0755, %{service}, root) %{_localstatedir}/run/%{service}
 
-%{python2_sitelib}/%{service}
-%{python2_sitelib}/%{service}-%{version}*.egg-info
-%exclude %{python2_sitelib}/%{service}/tests
+%{pyver_sitelib}/%{service}
+%{pyver_sitelib}/%{service}-%{version}*.egg-info
+%exclude %{pyver_sitelib}/%{service}/tests
 
 %{_bindir}/%{service}-manage
 %{_bindir}/%{service}-rootwrap
 
-%files -n python-%{service}-tests
+%files -n python%{pyver}-tests
 %license LICENSE
-%{python2_sitelib}/%{service}/tests
+%{pyver_sitelib}/%{service}/tests
 
 %files -n %{name}-share
 %{_bindir}/%{service}-share
