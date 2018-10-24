@@ -127,6 +127,7 @@ Requires:         python%{pyver}-oslo-reports >= 1.18.0
 Requires:         python%{pyver}-oslo-rootwrap >= 5.8.0
 Requires:         python%{pyver}-oslo-serialization >= 2.18.0
 Requires:         python%{pyver}-oslo-service >= 1.24.0
+Requires:         python%{pyver}-oslo-upgradecheck >= 0.1.0
 Requires:         python%{pyver}-oslo-utils >= 3.33.0
 
 # We need pbr at runtime because it deterimines the version seen in API.
@@ -391,6 +392,7 @@ getent passwd %{service} >/dev/null || \
 
 %{_bindir}/%{service}-manage
 %{_bindir}/%{service}-rootwrap
+%{_bindir}/%{service}-status
 
 %files -n python%{pyver}-%{service}-tests
 %license LICENSE
