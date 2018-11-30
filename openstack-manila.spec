@@ -68,7 +68,11 @@ BuildRequires:    python%{pyver}-lxml
 
 Requires:         python%{pyver}-%{service} = %{epoch}:%{version}-%{release}
 
+%if 0%{?rhel} && 0%{?rhel} < 8
 %{?systemd_requires}
+%else
+%{?systemd_ordering} # does not exist on EL7
+%endif
 Requires(pre):    shadow-utils
 
 # We pull the posix_ipc with Oslo's common lockutils.
