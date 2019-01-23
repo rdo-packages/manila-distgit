@@ -55,9 +55,7 @@ BuildRequires:    python%{pyver}-mock
 BuildRequires:    python%{pyver}-oslotest
 BuildRequires:    python%{pyver}-ddt
 BuildRequires:    python%{pyver}-tooz
-# Required to build manpages and html documents
-BuildRequires:    python%{pyver}-sphinx
-BuildRequires:    python%{pyver}-openstackdocstheme
+
 
 %if %{pyver} == 2
 BuildRequires:    python-d2to1
@@ -226,6 +224,9 @@ BuildRequires:    python%{pyver}-sqlalchemy
 BuildRequires:    python%{pyver}-webob
 # while not strictly required, quiets the build down when building docs.
 BuildRequires:    python%{pyver}-iso8601
+# Required to build manpages and html documents
+BuildRequires:    python%{pyver}-sphinx
+BuildRequires:    python%{pyver}-openstackdocstheme
 
 %if %{pyver} == 2
 BuildRequires:    python-migrate
