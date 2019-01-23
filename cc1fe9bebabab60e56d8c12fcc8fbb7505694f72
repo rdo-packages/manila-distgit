@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ad0253b_d2101cab",
+        "filename": "openstack-manila.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 168
+      },
+      "writtenOn": "2019-01-23T14:46:37Z",
+      "side": 1,
+      "message": "Do we also want a with_docs guard here as well?",
+      "revId": "cc1fe9bebabab60e56d8c12fcc8fbb7505694f72",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
