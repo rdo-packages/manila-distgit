@@ -273,11 +273,11 @@ PYTHONPATH=. oslo-config-generator-%{pyver} --config-file=etc/oslo-config-genera
 sphinx-build-%{pyver} -b html doc/source doc/build/html
 # Fix hidden-file-or-dir warnings
 rm -fr doc/build/html/.doctrees doc/build/html/.buildinfo
-%endif
 
 sphinx-build-%{pyver} -b man doc/source doc/build/man
 mkdir -p %{buildroot}%{_mandir}/man1
 install -p -D -m 644 doc/build/man/*.1 %{buildroot}%{_mandir}/man1/
+%endif
 
 # Setup directories
 install -d -m 755 %{buildroot}%{_sharedstatedir}/%{service}
@@ -359,7 +359,9 @@ getent passwd %{service} >/dev/null || \
 %{_unitdir}/%{name}-api.service
 %{_unitdir}/%{name}-scheduler.service
 %{_unitdir}/%{name}-data.service
+%if 0%{?with_doc}
 %{_mandir}/man1/%{service}*.1.gz
+%endif
 
 %defattr(-, %{service}, %{service}, -)
 %dir %{_sharedstatedir}/%{service}
