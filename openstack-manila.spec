@@ -48,6 +48,7 @@ BuildArch:        noarch
 BuildRequires:    intltool
 BuildRequires:    openstack-macros
 BuildRequires:    git
+BuildRequires:    systemd
 BuildRequires:    python%{pyver}-pbr
 BuildRequires:    python%{pyver}-setuptools
 BuildRequires:    python%{pyver}-devel
@@ -213,8 +214,6 @@ Summary:          Documentation for OpenStack Shared Filesystem Service
 Group:            Documentation
 
 Requires:         %{name} = %{epoch}:%{version}-%{release}
-
-BuildRequires:    systemd
 BuildRequires:    graphviz
 
 # Required to build module documents
