@@ -61,9 +61,11 @@ BuildRequires:    python%{pyver}-tooz
 %if %{pyver} == 2
 BuildRequires:    python-d2to1
 BuildRequires:    python-lxml
+BuildRequires:    python-retrying >= 1.2.3
 %else
 BuildRequires:    python%{pyver}-d2to1
 BuildRequires:    python%{pyver}-lxml
+BuildRequires:    python%{pyver}-retrying >= 1.2.3
 %endif
 
 Requires:         python%{pyver}-%{service} = %{epoch}:%{version}-%{release}
