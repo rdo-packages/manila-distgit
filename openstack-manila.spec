@@ -1,3 +1,4 @@
+%global milestone .0rc1
 # Macros for py2/py3 compatibility
 %if 0%{?fedora} || 0%{?rhel} > 7
 %global pyver %{python3_pkgversion}
@@ -27,13 +28,17 @@ Name:             openstack-%{service}
 # Liberty semver reset
 # https://review.openstack.org/#/q/I6a35fa0dda798fad93b804d00a46af80f08d475c,n,z
 Epoch:            1
-Version:          XXX
-Release:          XXX
+Version:          9.0.0
+Release:          0.1%{?milestone}%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
 License:          ASL 2.0
 URL:              https://wiki.openstack.org/wiki/Manila
 Source0:          https://tarballs.openstack.org/%{service}/%{service}-%{version}%{?milestone}.tar.gz
+#
+# patches_base=9.0.0.0rc1
+#
+
 Source2:          %{service}.logrotate
 Source3:          %{service}-dist.conf
 
@@ -416,3 +421,6 @@ getent passwd %{service} >/dev/null || \
 %endif
 
 %changelog
+* Mon Sep 30 2019 RDO <dev@lists.rdoproject.org> 1:9.0.0-0.1.0rc1
+- Update to 9.0.0.0rc1
+
