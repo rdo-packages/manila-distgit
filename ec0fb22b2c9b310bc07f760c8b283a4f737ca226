@@ -1,0 +1,8 @@
+Code-Review+2: Alfredo Moralejo <amoralej@redhat.com>
+Workflow+1: Alfredo Moralejo <amoralej@redhat.com>
+Verified+2: Zuul CI <zuul@review.rdoproject.org>
+Submitted-by: Zuul CI <zuul@review.rdoproject.org>
+Submitted-at: Thu, 26 Mar 2020 15:25:35 +0000
+Reviewed-on: https://review.rdoproject.org/r/26121
+Project: openstack/manila-distgit
+Branch: refs/heads/stein-rdo
