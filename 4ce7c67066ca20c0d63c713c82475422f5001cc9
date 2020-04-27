@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6f5f273_96d14c6c",
+        "filename": "openstack-manila.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2020-04-27T15:54:42Z",
+      "side": 1,
+      "message": "anyjson is not longer a requirement.",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 33
+      },
+      "revId": "4ce7c67066ca20c0d63c713c82475422f5001cc9",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
