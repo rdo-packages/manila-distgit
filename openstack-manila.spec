@@ -86,6 +86,7 @@ Requires:         python3-routes
 Requires:         python3-webob
 
 Requires:         python3-cinderclient >= 3.3.0
+Requires:         python3-glanceclient >= 2.15.0
 Requires:         python3-keystoneauth1 >= 3.4.0
 Requires:         python3-keystonemiddleware >= 4.17.0
 Requires:         python3-neutronclient >= 6.7.0
@@ -128,6 +129,7 @@ BuildRequires:    python3-oslo-policy >= 1.30.0
 BuildRequires:    python3-keystoneauth1
 BuildRequires:    python3-keystonemiddleware
 BuildRequires:    python3-cinderclient
+BuildRequires:    python3-glanceclient
 BuildRequires:    python3-neutronclient
 BuildRequires:    python3-novaclient >= 9.1.0
 BuildRequires:    python3-paramiko
