@@ -95,7 +95,7 @@ Requires:         python3-novaclient >= 9.1.0
 Requires:         python3-oslo-concurrency >= 3.26.0
 Requires:         python3-oslo-config >= 2:5.2.0
 Requires:         python3-oslo-context >= 2.19.2
-Requires:         python3-oslo-db >= 4.27.0
+Requires:         python3-oslo-db >= 5.1.1
 Requires:         python3-oslo-i18n >= 3.15.3
 Requires:         python3-oslo-log >= 3.36.0
 Requires:         python3-oslo-messaging >= 6.4.0
@@ -112,7 +112,6 @@ Requires:         python3-pbr
 
 Requires:         python3-six >= 1.10.0
 
-Requires:         python3-babel
 Requires:         python3-pyparsing >= 2.1.0
 
 Requires:         python3-lxml
