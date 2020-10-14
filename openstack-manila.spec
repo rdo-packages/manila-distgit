@@ -1,3 +1,5 @@
+%{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
+%global sources_gpg_sign 0x2426b928085a020d8a90d0d879ab7008d0896c8a
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
 %global service manila
 
@@ -34,6 +36,11 @@ Source13:         openstack-%{service}-data.service
 Source20:         %{service}-sudoers
 
 BuildArch:        noarch
+
+# Required for tarball sources verification
+%if 0%{?sources_gpg} == 1
+BuildRequires:  /usr/bin/gpgv2
+%endif
 BuildRequires:    intltool
 BuildRequires:    openstack-macros
 BuildRequires:    git
@@ -198,6 +205,10 @@ This package contains the associated documentation.
 %endif
 
 %prep
+# Required for tarball sources verification
+%if 0%{?sources_gpg} == 1
+%{gpgverify}  --keyring=%{SOURCE102} --signature=%{SOURCE101} --data=%{SOURCE0}
+%endif
 %autosetup -n %{service}-%{upstream_version} -S git
 
 find . \( -name .gitignore -o -name .placeholder \) -delete
