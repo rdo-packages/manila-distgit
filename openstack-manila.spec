@@ -48,7 +48,7 @@ BuildRequires:  /usr/bin/gpgv2
 %endif
 BuildRequires:    intltool
 BuildRequires:    openstack-macros
-BuildRequires:    git
+BuildRequires:    git-core
 BuildRequires:    systemd
 BuildRequires:    python3-pbr
 BuildRequires:    python3-setuptools
