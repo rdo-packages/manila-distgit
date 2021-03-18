@@ -82,56 +82,58 @@ Group:            Applications/System
 # Rootwrap in 2013.2 and later deprecates anything but sudo.
 Requires:         sudo
 
-Requires:         python3-paramiko
+Requires:         python3-paramiko >= 2.7.2
 
-Requires:         python3-alembic
-Requires:         python3-eventlet
-Requires:         python3-greenlet
-Requires:         python3-netaddr
-Requires:         python3-requests >= 2.14.2
-Requires:         python3-stevedore >= 1.20.0
-Requires:         python3-tooz >= 1.58.0
+Requires:         python3-alembic >= 1.4.2
+Requires:         python3-eventlet >= 0.26.1
+Requires:         python3-greenlet >= 0.4.13
+Requires:         python3-netaddr >= 0.7.19
+Requires:         python3-requests >= 2.23.0
+Requires:         python3-stevedore >= 3.2.2
+Requires:         python3-tooz >= 2.7.1
 
-Requires:         python3-sqlalchemy
+Requires:         python3-sqlalchemy >= 1.3.1
 
-Requires:         python3-routes
-Requires:         python3-webob
+Requires:         python3-routes >= 2.4.1
+Requires:         python3-webob >= 1.8.6
 
 Requires:         python3-cinderclient >= 3.3.0
-Requires:         python3-glanceclient >= 2.15.0
-Requires:         python3-keystoneauth1 >= 3.4.0
-Requires:         python3-keystonemiddleware >= 4.17.0
+Requires:         python3-glanceclient >= 3.2.2
+Requires:         python3-keystoneauth1 >= 4.2.1
+Requires:         python3-keystonemiddleware >= 9.1.0
 Requires:         python3-neutronclient >= 6.7.0
-Requires:         python3-novaclient >= 9.1.0
+Requires:         python3-novaclient >= 17.2.1
 
-Requires:         python3-oslo-concurrency >= 3.26.0
-Requires:         python3-oslo-config >= 2:5.2.0
-Requires:         python3-oslo-context >= 2.19.2
-Requires:         python3-oslo-db >= 5.1.1
-Requires:         python3-oslo-i18n >= 3.15.3
-Requires:         python3-oslo-log >= 3.36.0
-Requires:         python3-oslo-messaging >= 6.4.0
-Requires:         python3-oslo-middleware >= 3.31.0
-Requires:         python3-oslo-policy >= 1.30.0
-Requires:         python3-oslo-reports >= 1.18.0
-Requires:         python3-oslo-rootwrap >= 5.8.0
-Requires:         python3-oslo-serialization >= 2.18.0
-Requires:         python3-oslo-service >= 2.1.1
-Requires:         python3-oslo-upgradecheck >= 0.1.0
-Requires:         python3-oslo-utils >= 3.40.2
+Requires:         python3-oslo-concurrency >= 4.3.0
+Requires:         python3-oslo-config >= 2:8.3.2
+Requires:         python3-oslo-context >= 3.1.1
+Requires:         python3-oslo-db >= 8.4.0
+Requires:         python3-oslo-i18n >= 5.0.1
+Requires:         python3-oslo-log >= 4.4.0
+Requires:         python3-oslo-messaging >= 12.5.0
+Requires:         python3-oslo-middleware >= 4.1.1
+Requires:         python3-oslo-policy >= 3.6.2
+Requires:         python3-oslo-reports >= 2.2.0
+Requires:         python3-oslo-rootwrap >= 6.2.0
+Requires:         python3-oslo-serialization >= 4.0.1
+Requires:         python3-oslo-service >= 2.4.0
+Requires:         python3-oslo-upgradecheck >= 1.3.0
+Requires:         python3-oslo-utils >= 4.7.0
 # We need pbr at runtime because it deterimines the version seen in API.
-Requires:         python3-pbr
+Requires:         python3-pbr >= 5.5.0
 
-Requires:         python3-six >= 1.10.0
+Requires:         python3-six >= 1.15.0
 
-Requires:         python3-pyparsing >= 2.1.0
+Requires:         python3-pyparsing >= 2.4.7
 
-Requires:         python3-lxml
+Requires:         python3-lxml >= 4.2.3
 Requires:         python3-retrying >= 1.2.3
-Requires:         python3-paste-deploy
+Requires:         python3-paste-deploy >= 2.1.0
+Requires:         python3-paste >= 3.4.3
+Requires:         python3-osprofiler >= 3.4.0
 
 # Config file generation dependencies
-BuildRequires:    python3-oslo-config >= 2:5.1.0
+BuildRequires:    python3-oslo-config >= 2:8.3.2
 BuildRequires:    python3-oslo-concurrency >= 3.25.0
 BuildRequires:    python3-oslo-db >= 4.27.0
 BuildRequires:    python3-oslo-messaging >= 5.29.0
