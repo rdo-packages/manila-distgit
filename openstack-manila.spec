@@ -437,3 +437,4 @@ getent passwd %{service} >/dev/null || \
 * Mon Sep 30 2019 RDO <dev@lists.rdoproject.org> 1:9.0.0-0.1.0rc1
 - Update to 9.0.0.0rc1
 
+# REMOVEME: error caused by commit https://opendev.org/openstack/manila/commit/e4de2ebc162950d49f86f82eafc167a00e887d32
