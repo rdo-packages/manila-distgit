@@ -60,7 +60,6 @@ BuildRequires:    python3-tooz
 
 
 BuildRequires:    python3-lxml
-BuildRequires:    python3-retrying >= 1.2.3
 
 Requires:         python3-%{service} = %{epoch}:%{version}-%{release}
 
@@ -92,7 +91,7 @@ Requires:         python3-requests >= 2.23.0
 Requires:         python3-stevedore >= 3.2.2
 Requires:         python3-tooz >= 2.7.1
 
-Requires:         python3-sqlalchemy >= 1.3.1
+Requires:         python3-sqlalchemy >= 1.3.2
 
 Requires:         python3-routes >= 2.4.1
 Requires:         python3-webob >= 1.8.6
@@ -112,7 +111,7 @@ Requires:         python3-oslo-i18n >= 5.0.1
 Requires:         python3-oslo-log >= 4.4.0
 Requires:         python3-oslo-messaging >= 12.5.0
 Requires:         python3-oslo-middleware >= 4.1.1
-Requires:         python3-oslo-policy >= 3.6.2
+Requires:         python3-oslo-policy >= 3.7.0
 Requires:         python3-oslo-reports >= 2.2.0
 Requires:         python3-oslo-rootwrap >= 6.2.0
 Requires:         python3-oslo-serialization >= 4.0.1
@@ -127,10 +126,10 @@ Requires:         python3-six >= 1.15.0
 Requires:         python3-pyparsing >= 2.4.6
 
 Requires:         python3-lxml >= 4.2.3
-Requires:         python3-retrying >= 1.2.3
 Requires:         python3-paste-deploy >= 2.1.0
 Requires:         python3-paste >= 3.4.3
 Requires:         python3-osprofiler >= 3.4.0
+Requires:         python3-tenacity >= 6.2.0
 
 # Config file generation dependencies
 BuildRequires:    python3-oslo-config >= 2:8.3.2
