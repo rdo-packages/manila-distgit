@@ -160,11 +160,6 @@ Requires:         python3-%{service} = %{epoch}:%{version}-%{release}
 %{?systemd_requires}
 Requires(pre):    shadow-utils
 
-# The manila-share can create shares out of LVM slices.
-Requires:         lvm2
-# The manila-share runs testparm, smbd and aborts if it's missing.
-Requires:         samba
-
 %description -n   %{name}-share
 %{common_desc}
 
