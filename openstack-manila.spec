@@ -385,3 +385,4 @@ getent passwd %{service} >/dev/null || \
 %endif
 
 %changelog
+# REMOVEME: error caused by commit https://opendev.org/openstack/manila/commit/40c9635a230edd7922b3dd58c972c9891cdaa107
