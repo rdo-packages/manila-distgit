@@ -57,7 +57,7 @@ BuildRequires:    python3-mock
 BuildRequires:    python3-oslotest
 BuildRequires:    python3-ddt
 BuildRequires:    python3-tooz
-
+BuildRequires:    python3-oslo-privsep
 
 BuildRequires:    python3-lxml
 
@@ -112,6 +112,7 @@ Requires:         python3-oslo-log >= 4.4.0
 Requires:         python3-oslo-messaging >= 12.5.0
 Requires:         python3-oslo-middleware >= 4.1.1
 Requires:         python3-oslo-policy >= 3.7.0
+Requires:         python3-oslo-privsep >= 2.4.0
 Requires:         python3-oslo-reports >= 2.2.0
 Requires:         python3-oslo-rootwrap >= 6.2.0
 Requires:         python3-oslo-serialization >= 4.0.1
