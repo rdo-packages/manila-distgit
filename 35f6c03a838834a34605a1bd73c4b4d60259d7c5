@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3204efc7_9907fe60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 635
+      },
+      "writtenOn": "2022-02-25T13:20:10Z",
+      "side": 1,
+      "message": "It was added in https://review.opendev.org/c/openstack/manila/+/811758, see requirements.txt file",
+      "revId": "35f6c03a838834a34605a1bd73c4b4d60259d7c5",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
