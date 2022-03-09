@@ -91,7 +91,7 @@ Requires:         python3-requests >= 2.23.0
 Requires:         python3-stevedore >= 3.2.2
 Requires:         python3-tooz >= 2.7.1
 
-Requires:         python3-sqlalchemy >= 1.3.2
+Requires:         python3-sqlalchemy >= 1.3.17
 
 Requires:         python3-routes >= 2.4.1
 Requires:         python3-webob >= 1.8.6
