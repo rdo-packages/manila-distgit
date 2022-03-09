@@ -91,7 +91,7 @@ Requires:         python3-requests >= 2.23.0
 Requires:         python3-stevedore >= 3.2.2
 Requires:         python3-tooz >= 2.7.1
 
-Requires:         python3-sqlalchemy >= 1.3.2
+Requires:         python3-sqlalchemy >= 1.3.17
 
 Requires:         python3-routes >= 2.4.1
 Requires:         python3-webob >= 1.8.6
@@ -130,7 +130,7 @@ Requires:         python3-lxml >= 4.2.3
 Requires:         python3-paste-deploy >= 2.1.0
 Requires:         python3-paste >= 3.4.3
 Requires:         python3-osprofiler >= 3.4.0
-Requires:         python3-tenacity >= 6.2.0
+Requires:         python3-tenacity >= 6.3.1
 
 # Config file generation dependencies
 BuildRequires:    python3-oslo-config >= 2:8.3.2
