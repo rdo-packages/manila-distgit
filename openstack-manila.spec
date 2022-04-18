@@ -1,5 +1,5 @@
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
-%global sources_gpg_sign 0x01527a34f0d0080f8a5db8d6eb6c5df21b4b6363
+%global sources_gpg_sign 0xa63ea142678138d1bb15f2e303bdfd64dd164087
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
 %global service manila
 
@@ -18,7 +18,7 @@ Name:             openstack-%{service}
 # Liberty semver reset
 # https://review.openstack.org/#/q/I6a35fa0dda798fad93b804d00a46af80f08d475c,n,z
 Epoch:            1
-Version:          12.1.1
+Version:          12.1.2
 Release:          1%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
@@ -388,6 +388,9 @@ getent passwd %{service} >/dev/null || \
 %endif
 
 %changelog
+* Mon Apr 18 2022 RDO <dev@lists.rdoproject.org> 1:12.1.2-1
+- Update to 12.1.2
+
 * Mon Jan 31 2022 RDO <dev@lists.rdoproject.org> 1:12.1.1-1
 - Update to 12.1.1
 
