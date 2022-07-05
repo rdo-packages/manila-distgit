@@ -16,6 +16,23 @@
       "message": "Thanks for noticing this, and fixing it up Takashi. LGTM!",
       "revId": "fcb18f654f85c1712dc70223b3a4ba6cf88de4dc",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3936f562_6717631b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 635
+      },
+      "writtenOn": "2022-07-05T09:47:11Z",
+      "side": 1,
+      "message": "recheck",
+      "revId": "fcb18f654f85c1712dc70223b3a4ba6cf88de4dc",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
