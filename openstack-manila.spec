@@ -85,8 +85,8 @@ Requires:         python3-paramiko >= 2.7.2
 
 Requires:         python3-alembic >= 1.4.2
 Requires:         python3-eventlet >= 0.26.1
-Requires:         python3-greenlet >= 0.4.13
-Requires:         python3-netaddr >= 0.7.19
+Requires:         python3-greenlet >= 0.4.16
+Requires:         python3-netaddr >= 0.8.0
 Requires:         python3-requests >= 2.23.0
 Requires:         python3-stevedore >= 3.2.2
 Requires:         python3-tooz >= 2.7.1
@@ -122,9 +122,9 @@ Requires:         python3-oslo-utils >= 4.7.0
 # We need pbr at runtime because it deterimines the version seen in API.
 Requires:         python3-pbr >= 5.5.0
 
-Requires:         python3-pyparsing >= 2.4.6
+Requires:         python3-pyparsing >= 2.4.7
 
-Requires:         python3-lxml >= 4.2.3
+Requires:         python3-lxml >= 4.5.2
 Requires:         python3-paste-deploy >= 2.1.0
 Requires:         python3-paste >= 3.4.3
 Requires:         python3-osprofiler >= 3.4.0
