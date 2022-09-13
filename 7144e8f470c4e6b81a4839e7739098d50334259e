@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89258cf8_130b68c6",
+        "filename": "openstack-manila.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 635
+      },
+      "writtenOn": "2022-09-13T11:18:44Z",
+      "side": 1,
+      "message": "0.8.0",
+      "range": {
+        "startLine": 89,
+        "startChar": 37,
+        "endLine": 89,
+        "endChar": 43
+      },
+      "revId": "7144e8f470c4e6b81a4839e7739098d50334259e",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d6caf32_46fb3d15",
+        "filename": "openstack-manila.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 635
+      },
+      "writtenOn": "2022-09-13T11:18:44Z",
+      "side": 1,
+      "message": "2.4.7",
+      "range": {
+        "startLine": 125,
+        "startChar": 43,
+        "endLine": 125,
+        "endChar": 44
+      },
+      "revId": "7144e8f470c4e6b81a4839e7739098d50334259e",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
