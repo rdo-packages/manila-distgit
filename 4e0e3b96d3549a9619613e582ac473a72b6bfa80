@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f65c9e7_c4a42f44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 635
+      },
+      "writtenOn": "2022-09-15T12:29:53Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e I\u0027m not against this, but then we need to make sure that the deploymento tools take care of installation of lvm2 and/or samba when needed. Taking a look into puppet-manila i don\u0027t find installation of them so i guess that should be fixed in advance.\n\nHi Goutham, did you have a chance to work on what Alfredo proposed above ^ ?",
+      "revId": "4e0e3b96d3549a9619613e582ac473a72b6bfa80",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
