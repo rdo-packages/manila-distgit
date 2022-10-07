@@ -95,6 +95,7 @@ Requires:         python3-stevedore >= 3.2.2
 Requires:         python3-tooz >= 2.7.1
 
 Requires:         python3-sqlalchemy >= 1.3.1
+Requires:         python3-sqlalchemy < 1.4.0
 
 Requires:         python3-routes >= 2.4.1
 Requires:         python3-webob >= 1.8.6
@@ -199,7 +200,7 @@ BuildRequires:    graphviz
 # Required to build module documents
 BuildRequires:    python3-eventlet
 BuildRequires:    python3-routes
-BuildRequires:    python3-sqlalchemy
+BuildRequires:    python3-sqlalchemy < 1.4.0
 BuildRequires:    python3-webob
 # while not strictly required, quiets the build down when building docs.
 BuildRequires:    python3-iso8601
