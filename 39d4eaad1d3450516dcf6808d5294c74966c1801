@@ -16,6 +16,24 @@
       "message": "waiting for python-sqlalchemy-utils update promotion",
       "revId": "39d4eaad1d3450516dcf6808d5294c74966c1801",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3f355ae_ee8da7ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2023-05-23T15:11:39Z",
+      "side": 1,
+      "message": "You can send patch to rdoinfo proposing to promote new python-sqlalchemy-utils to cloud9s-openstack-bobcat-testing",
+      "parentUuid": "fd7de087_47f4e49f",
+      "revId": "39d4eaad1d3450516dcf6808d5294c74966c1801",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
