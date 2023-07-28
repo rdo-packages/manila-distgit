@@ -3,16 +3,18 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
 %global service manila
 
-## N.B. For next release: in the past Manila's milestones didn't have a dot.
-## If they gain a dot, put it into the milestone macro, like we do with dist.
-#global milestone rc2
-
 %global common_desc \
 OpenStack Shared Filesystem Service (code-name Manila) provides services \
 to manage network filesystems for use by Virtual Machine instances.
 
 
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
+# we are excluding some BRs from automatic generator
+%global excluded_brs doc8 bandit pre-commit hacking flake8-import-order bashate os-api-ref psycopg2-binary
+# Exclude sphinx from BRs if docs are disabled
+%if ! 0%{?with_doc}
+%global excluded_brs %{excluded_brs} sphinx openstackdocstheme
+%endif
 
 Name:             openstack-%{service}
 # Liberty semver reset
@@ -22,7 +24,7 @@ Version:          XXX
 Release:          XXX
 Summary:          OpenStack Shared Filesystem Service
 
-License:          ASL 2.0
+License:          Apache-2.0
 URL:              https://wiki.openstack.org/wiki/Manila
 Source0:          https://tarballs.openstack.org/%{service}/%{service}-%{version}%{?milestone}.tar.gz
 Source2:          %{service}.logrotate
@@ -50,24 +52,12 @@ BuildRequires:    intltool
 BuildRequires:    openstack-macros
 BuildRequires:    git-core
 BuildRequires:    systemd
-BuildRequires:    python3-pbr
-BuildRequires:    python3-setuptools
 BuildRequires:    python3-devel
-BuildRequires:    python3-mock
-BuildRequires:    python3-oslotest
-BuildRequires:    python3-ddt
-BuildRequires:    python3-tooz
-BuildRequires:    python3-oslo-privsep
-
-BuildRequires:    python3-lxml
-
+BuildRequires:    pyproject-rpm-macros
 Requires:         python3-%{service} = %{epoch}:%{version}-%{release}
 
-%if 0%{?rhel} && 0%{?rhel} < 8
-%{?systemd_requires}
-%else
-%{?systemd_ordering} # does not exist on EL7
-%endif
+%{?systemd_ordering}
+
 Requires(pre):    shadow-utils
 
 %description
@@ -75,76 +65,9 @@ Requires(pre):    shadow-utils
 
 %package -n       python3-%{service}
 Summary:          Python libraries for OpenStack Shared Filesystem Service
-%{?python_provide:%python_provide python3-%{service}}
 Group:            Applications/System
 
-# Rootwrap in 2013.2 and later deprecates anything but sudo.
 Requires:         sudo
-
-Requires:         python3-paramiko >= 2.7.2
-
-Requires:         python3-alembic >= 1.4.2
-Requires:         python3-eventlet >= 0.26.1
-Requires:         python3-greenlet >= 0.4.16
-Requires:         python3-netaddr >= 0.8.0
-Requires:         python3-requests >= 2.23.0
-Requires:         python3-stevedore >= 3.2.2
-Requires:         python3-tooz >= 2.7.1
-
-Requires:         python3-sqlalchemy >= 1.3.17
-Requires:         python3-sqlalchemy-utils >= 0.38.3
-
-Requires:         python3-routes >= 2.4.1
-Requires:         python3-webob >= 1.8.6
-
-Requires:         python3-cinderclient >= 3.3.0
-Requires:         python3-glanceclient >= 3.2.2
-Requires:         python3-keystoneauth1 >= 4.2.1
-Requires:         python3-keystonemiddleware >= 9.1.0
-Requires:         python3-neutronclient >= 6.7.0
-Requires:         python3-novaclient >= 17.2.1
-
-Requires:         python3-oslo-concurrency >= 4.3.0
-Requires:         python3-oslo-config >= 2:8.3.2
-Requires:         python3-oslo-context >= 3.1.1
-Requires:         python3-oslo-db >= 8.4.0
-Requires:         python3-oslo-i18n >= 5.0.1
-Requires:         python3-oslo-log >= 4.4.0
-Requires:         python3-oslo-messaging >= 14.1.0
-Requires:         python3-oslo-middleware >= 4.1.1
-Requires:         python3-oslo-policy >= 3.7.0
-Requires:         python3-oslo-privsep >= 2.4.0
-Requires:         python3-oslo-reports >= 2.2.0
-Requires:         python3-oslo-rootwrap >= 6.2.0
-Requires:         python3-oslo-serialization >= 4.0.1
-Requires:         python3-oslo-service >= 2.4.0
-Requires:         python3-oslo-upgradecheck >= 1.3.0
-Requires:         python3-oslo-utils >= 4.7.0
-# We need pbr at runtime because it deterimines the version seen in API.
-Requires:         python3-pbr >= 5.5.0
-
-Requires:         python3-pyparsing >= 2.4.7
-
-Requires:         python3-lxml >= 4.5.2
-Requires:         python3-paste-deploy >= 2.1.0
-Requires:         python3-paste >= 3.4.3
-Requires:         python3-osprofiler >= 3.4.0
-Requires:         python3-tenacity >= 6.3.1
-
-# Config file generation dependencies
-BuildRequires:    python3-oslo-config >= 2:8.3.2
-BuildRequires:    python3-oslo-concurrency >= 3.25.0
-BuildRequires:    python3-oslo-db >= 4.27.0
-BuildRequires:    python3-oslo-messaging >= 5.29.0
-BuildRequires:    python3-oslo-middleware
-BuildRequires:    python3-oslo-policy >= 1.30.0
-BuildRequires:    python3-keystoneauth1
-BuildRequires:    python3-keystonemiddleware
-BuildRequires:    python3-cinderclient
-BuildRequires:    python3-glanceclient
-BuildRequires:    python3-neutronclient
-BuildRequires:    python3-novaclient >= 9.1.0
-BuildRequires:    python3-paramiko
 
 %description -n   python3-%{service}
 %{common_desc}
@@ -173,9 +96,7 @@ exports shares, similar to a filer.
 
 %package -n python3-%{service}-tests
 Summary:        Unit tests for the OpenStack Shared Filesystem Service
-%{?python_provide:%python_provide python3-%{service}-tests}
 Requires:       openstack-%{service} = %{epoch}:%{version}-%{release}
-
 # ddt is a runtime dependency of various tests
 Requires:    python3-ddt
 
@@ -192,17 +113,6 @@ Group:            Documentation
 
 Requires:         %{name} = %{epoch}:%{version}-%{release}
 BuildRequires:    graphviz
-
-# Required to build module documents
-BuildRequires:    python3-eventlet
-BuildRequires:    python3-routes
-BuildRequires:    python3-sqlalchemy
-BuildRequires:    python3-webob
-# while not strictly required, quiets the build down when building docs.
-BuildRequires:    python3-iso8601
-# Required to build manpages and html documents
-BuildRequires:    python3-sphinx
-BuildRequires:    python3-openstackdocstheme
 
 %description      doc
 %{common_desc}
@@ -221,30 +131,44 @@ find . \( -name .gitignore -o -name .placeholder \) -delete
 
 find %{service} -name \*.py -exec sed -i '/\/usr\/bin\/env python/{d;q}' {} +
 
-# Remove the requirements file so that pbr hooks don't add it
-# to distutils requires_dist config
-%py_req_cleanup
+sed -i /^[[:space:]]*-c{env:.*_CONSTRAINTS_FILE.*/d tox.ini
+sed -i "s/^deps = -c{env:.*_CONSTRAINTS_FILE.*/deps =/" tox.ini
+sed -i /^minversion.*/d tox.ini
+sed -i /^requires.*virtualenv.*/d tox.ini
+# Tox uses doc8 to check docs syntax which we do not ship
+sed -i /.*doc8.*/d tox.ini
+sed -i '/sphinx-build/ s/-W//' tox.ini
+# We do not run linters on packaging
+rm -f manila/tests/test_hacking.py
 
-# FIXME avoid LXD dependency - real fix is to make drivers fully pluggable upstream
-sed -i '/lxd/ s/^/#/' %{service}/opts.py
+# Exclude some bad-known BRs
+for pkg in %{excluded_brs}; do
+  for reqfile in doc/requirements.txt test-requirements.txt; do
+    if [ -f $reqfile ]; then
+      sed -i /^${pkg}.*/d $reqfile
+    fi
+  done
+done
 
-# disable warning-is-error, image install/common/figures/hwreqs.png is not included
-# in the tarball so it generates a warning when trying to create the doc. Until this
-# is fixed upstream, we need to disable warning-is-error
-sed -i 's/^warning-is-error.*/warning-is-error = 0/g' setup.cfg
+# Automatic BR generation
+%generate_buildrequires
+%if 0%{?with_doc}
+  %pyproject_buildrequires -t -e %{default_toxenv},docs
+%else
+  %pyproject_buildrequires -t -e %{default_toxenv}
+%endif
 
 %build
-# Generate config file
-PYTHONPATH=. oslo-config-generator --config-file=etc/oslo-config-generator/%{service}.conf
-
-%{py3_build}
+%pyproject_wheel
 
 %install
-%{py3_install}
+%pyproject_install
+# Generate config file
+PYTHONPATH=%{buildroot}/%{python3_sitelib} oslo-config-generator --config-file=etc/oslo-config-generator/%{service}.conf
 
 # docs generation requires everything to be installed first
 %if 0%{?with_doc}
-sphinx-build -b html doc/source doc/build/html
+%tox -e docs
 # Fix hidden-file-or-dir warnings
 rm -fr doc/build/html/.doctrees doc/build/html/.buildinfo
 
@@ -325,6 +249,9 @@ getent passwd %{service} >/dev/null || \
 %postun -n %{name}-share
 %systemd_postun_with_restart %{name}-share.service
 
+%check
+%tox -e %{default_toxenv}
+
 %files
 %{_bindir}/%{service}-wsgi
 %{_bindir}/%{service}-api
@@ -364,7 +291,7 @@ getent passwd %{service} >/dev/null || \
 %dir %attr(0755, %{service}, root) %{_localstatedir}/run/%{service}
 
 %{python3_sitelib}/%{service}
-%{python3_sitelib}/%{service}-%{version}*.egg-info
+%{python3_sitelib}/%{service}-%{version}*.dist-info
 %exclude %{python3_sitelib}/%{service}/tests
 
 %{_bindir}/%{service}-manage
