@@ -1,4 +1,3 @@
-%global milestone .0rc1
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
 %global sources_gpg_sign 0x2ef3fe0ec2b075ab7458b5f8b702b20b13df2318
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
@@ -21,15 +20,13 @@ Name:             openstack-%{service}
 # Liberty semver reset
 # https://review.openstack.org/#/q/I6a35fa0dda798fad93b804d00a46af80f08d475c,n,z
 Epoch:            1
-Version:          18.0.0
-Release:          0.1%{?milestone}%{?dist}
+Version:          18.0.1
+Release:          1%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
 License:          Apache-2.0
 URL:              https://wiki.openstack.org/wiki/Manila
 Source0:          https://tarballs.openstack.org/%{service}/%{service}-%{version}%{?milestone}.tar.gz
-#
-# patches_base=18.0.0.0rc1
 #
 
 Source2:          %{service}.logrotate
@@ -317,6 +314,9 @@ getent passwd %{service} >/dev/null || \
 %endif
 
 %changelog
+* Wed Apr 03 2024 RDO <dev@lists.rdoproject.org> 1:18.0.1-1
+- Update to 18.0.1
+
 * Mon Mar 18 2024 RDO <dev@lists.rdoproject.org> 1:18.0.0-0.1.0rc1
 - Update to 18.0.0.0rc1
 
