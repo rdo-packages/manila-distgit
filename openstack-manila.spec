@@ -312,3 +312,4 @@ getent passwd %{service} >/dev/null || \
 %endif
 
 %changelog
+
