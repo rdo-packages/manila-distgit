@@ -1,0 +1,8 @@
+Workflow+1: Joel Capitao <jcapitao@redhat.com>
+Verified+2: Zuul CI <zuul@review.rdoproject.org>
+Code-Review+2: Joel Capitao <jcapitao@redhat.com>
+Submitted-by: Zuul CI <zuul@review.rdoproject.org>
+Submitted-at: Mon, 22 Jul 2024 09:40:04 +0000
+Reviewed-on: https://review.rdoproject.org/r/c/openstack/manila-distgit/+/53850
+Project: openstack/manila-distgit
+Branch: refs/heads/rpm-master
