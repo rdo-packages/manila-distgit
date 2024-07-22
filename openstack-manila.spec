@@ -140,6 +140,8 @@ sed -i /.*doc8.*/d tox.ini
 sed -i '/sphinx-build/ s/-W//' tox.ini
 # We do not run linters on packaging
 rm -f manila/tests/test_hacking.py
+# uncap version of packaging to work with centos one
+sed -i 's/packaging>=24.1/packaging/g' requirements.txt
 
 # Exclude some bad-known BRs
 for pkg in %{excluded_brs}; do
