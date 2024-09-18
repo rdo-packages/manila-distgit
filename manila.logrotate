@@ -1,5 +1,3 @@
-compress
-
 /var/log/manila/*.log {
     rotate 14
     size 10M
