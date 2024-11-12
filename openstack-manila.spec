@@ -20,7 +20,7 @@ Name:             openstack-%{service}
 # Liberty semver reset
 # https://review.openstack.org/#/q/I6a35fa0dda798fad93b804d00a46af80f08d475c,n,z
 Epoch:            1
-Version:          17.3.0
+Version:          17.3.1
 Release:          1%{?dist}
 Summary:          OpenStack Shared Filesystem Service
 
@@ -314,6 +314,9 @@ getent passwd %{service} >/dev/null || \
 %endif
 
 %changelog
+* Tue Nov 12 2024 RDO <dev@lists.rdoproject.org> 1:17.3.1-1
+- Update to 17.3.1
+
 * Fri Nov 08 2024 RDO <dev@lists.rdoproject.org> 1:17.3.0-1
 - Update to 17.3.0
 
