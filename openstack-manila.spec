@@ -269,12 +269,17 @@ install -d -m 755 %{buildroot}%{_localstatedir}/log/%{service}
 install -d -m 755 %{buildroot}%{_sysconfdir}/%{service}
 install -p -D -m 640 etc/%{service}/%{service}.conf.sample %{buildroot}%{_sysconfdir}/%{service}/%{service}.conf
 install -p -D -m 644 %{SOURCE3} %{buildroot}%{_datadir}/%{service}/%{service}-dist.conf
+%if 0%{?rhosp} == 1
+install -p -D -m 640 etc/%{service}/rootwrap.conf %{buildroot}%{_sysconfdir}/%{service}/rootwrap.conf
+install -p -D -m 640 etc/%{service}/api-paste.ini %{buildroot}%{_sysconfdir}/%{service}/api-paste.ini
+%else
 mv %{buildroot}%{_prefix}/etc/%{service}/rootwrap.conf %{buildroot}%{_sysconfdir}/%{service}/rootwrap.conf
 # XXX We want to set signing_dir to /var/lib/manila/keystone-signing,
 # but there's apparently no way to override the value in api-paste.ini
 # from manila.conf. So we keep a forked api-paste.ini around for now.
 #install -p -D -m 640 etc/manila/api-paste.ini %{buildroot}%{_sysconfdir}/manila/api-paste.ini
 mv %{buildroot}%{_prefix}/etc/%{service}/api-paste.ini %{buildroot}%{_sysconfdir}/%{service}/api-paste.ini
+%endif
 
 # Install initscripts for services
 install -p -D -m 644 %{SOURCE10} %{buildroot}%{_unitdir}/%{name}-api.service
@@ -293,11 +298,20 @@ install -d -m 755 %{buildroot}%{_localstatedir}/run/%{service}
 
 # Install rootwrap files in /usr/share/manila/rootwrap
 mkdir -p %{buildroot}%{_datadir}/%{service}/rootwrap/
+%if 0%{?rhosp} == 1
+install -p -D -m 644 etc/%{service}/rootwrap.d/* %{buildroot}%{_datarootdir}/%{service}/rootwrap/
+%else
 mv %{buildroot}%{_prefix}/etc/%{service}/rootwrap.d/* %{buildroot}%{_datadir}/%{service}/rootwrap/
+%endif
 
+%if 0%{?rhosp} == 1
+# Remove duplicate config files under /usr/etc/
+rm -rf %{buildroot}%{_prefix}/etc
+%else
 # Remove duplicate config directory /usr/etc/manila, /usr/etc/manila/rootwrap.d,
 # we are keeping config files at /etc/manila and rootwrap files at /usr/share/manila/rootwrap
 rmdir %{buildroot}%{_prefix}/etc/%{service}/rootwrap.d %{buildroot}%{_prefix}/etc/%{service}
+%endif
 
 # Remove files unneeded in production
 rm -f %{buildroot}%{_bindir}/%{service}-all
