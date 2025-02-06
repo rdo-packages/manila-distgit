@@ -313,8 +313,11 @@ rm -rf %{buildroot}%{_prefix}/etc
 rmdir %{buildroot}%{_prefix}/etc/%{service}/rootwrap.d %{buildroot}%{_prefix}/etc/%{service}
 %endif
 
+%if 0%{?rhosp} == 1
+%else
 # Remove files unneeded in production
 rm -f %{buildroot}%{_bindir}/%{service}-all
+%endif
 
 %pre -n python3-%{service}
 getent group %{service} >/dev/null || groupadd -r %{service}
