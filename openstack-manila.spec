@@ -219,9 +219,6 @@ mv %{buildroot}%{_prefix}/etc/%{service}/rootwrap.d/* %{buildroot}%{_datadir}/%{
 # we are keeping config files at /etc/manila and rootwrap files at /usr/share/manila/rootwrap
 rmdir %{buildroot}%{_prefix}/etc/%{service}/rootwrap.d %{buildroot}%{_prefix}/etc/%{service}
 
-# Remove files unneeded in production
-rm -f %{buildroot}%{_bindir}/%{service}-all
-
 %pre -n python3-%{service}
 getent group %{service} >/dev/null || groupadd -r %{service}
 getent passwd %{service} >/dev/null || \
