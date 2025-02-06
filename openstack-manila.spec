@@ -211,9 +211,6 @@ install -p -D -m 644 etc/%{service}/rootwrap.d/* %{buildroot}%{_datarootdir}/%{s
 # Remove duplicate config files under /usr/etc/
 rm -rf %{buildroot}%{_prefix}/etc
 
-# Remove files unneeded in production
-rm -f %{buildroot}%{_bindir}/%{service}-all
-
 %pre -n python3-%{service}
 getent group %{service} >/dev/null || groupadd -r %{service}
 getent passwd %{service} >/dev/null || \
