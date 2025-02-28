@@ -97,8 +97,6 @@ exports shares, similar to a filer.
 %package -n python3-%{service}-tests
 Summary:        Unit tests for the OpenStack Shared Filesystem Service
 Requires:       openstack-%{service} = %{epoch}:%{version}-%{release}
-# ddt is a runtime dependency of various tests
-Requires:    python3-ddt
 
 %description -n python3-%{service}-tests
 %{common_desc}
