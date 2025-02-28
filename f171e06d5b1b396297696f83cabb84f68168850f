@@ -16,6 +16,24 @@
       "message": "Apologies, I should know that part - how is ddt imported automatically now?",
       "revId": "f171e06d5b1b396297696f83cabb84f68168850f",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "484713ac_8f51c28f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 682
+      },
+      "writtenOn": "2025-02-28T16:24:08Z",
+      "side": 1,
+      "message": "(Someone from RDO may correct me but) my understanding is that all libraries listed in requirements or test-requirements are now added to package dependencies by python package macro, unless the package is explicitly excluded (and is removed from these files during build).\n\nFor example oslotest is required by the test code but is not listed here, but now it is added to the package dependencies by the macro",
+      "parentUuid": "c4439f47_de112603",
+      "revId": "f171e06d5b1b396297696f83cabb84f68168850f",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
