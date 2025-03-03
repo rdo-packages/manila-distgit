@@ -1,0 +1,8 @@
+Verified+2: Zuul CI <zuul@review.rdoproject.org>
+Code-Review+2: Karolina Kula <kkula@redhat.com>
+Workflow+1: Karolina Kula <kkula@redhat.com>
+Submitted-by: Zuul CI <zuul@review.rdoproject.org>
+Submitted-at: Mon, 03 Mar 2025 10:33:03 +0000
+Reviewed-on: https://review.rdoproject.org/r/c/openstack/manila-distgit/+/56622
+Project: openstack/manila-distgit
+Branch: refs/heads/rpm-master
