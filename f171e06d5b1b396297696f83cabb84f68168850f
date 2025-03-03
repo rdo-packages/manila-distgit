@@ -34,6 +34,24 @@
       "parentUuid": "c4439f47_de112603",
       "revId": "f171e06d5b1b396297696f83cabb84f68168850f",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe93f8ea_750886a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 757
+      },
+      "writtenOn": "2025-03-03T10:21:47Z",
+      "side": 1,
+      "message": "yes, that\u0027s correct. The dependency is here https://github.com/openstack/manila/blob/master/test-requirements.txt#L4, so it is automatically added by python-pyproject-macros: https://gitlab.com/redhat/centos-stream/rpms/pyproject-rpm-macros",
+      "parentUuid": "484713ac_8f51c28f",
+      "revId": "f171e06d5b1b396297696f83cabb84f68168850f",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
