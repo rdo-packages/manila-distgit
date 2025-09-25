@@ -34,6 +34,9 @@ Source10:         openstack-%{service}-api.service
 Source11:         openstack-%{service}-scheduler.service
 Source12:         openstack-%{service}-share.service
 Source13:         openstack-%{service}-data.service
+%if 0%{?rhosp} == 1
+Source14:         %{service}-wsgi
+%endif
 
 Source20:         %{service}-sudoers
 # Required for tarball sources verification
@@ -317,6 +320,11 @@ rmdir %{buildroot}%{_prefix}/etc/%{service}/rootwrap.d %{buildroot}%{_prefix}/et
 %else
 # Remove files unneeded in production
 rm -f %{buildroot}%{_bindir}/%{service}-all
+%endif
+
+%if 0%{?rhosp} == 1
+# Install the cinder-wsgi compatibility file
+install -m 755 %{SOURCE14} %{buildroot}%{_bindir}/%{service}-wsgi
 %endif
 
 %pre -n python3-%{service}
