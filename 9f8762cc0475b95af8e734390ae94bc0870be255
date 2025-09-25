@@ -16,6 +16,23 @@
       "message": "we need this in the distgit as we\u0027re planning to rebase to F soon. This ensures that our updated spec provides this file in the new scratch builds.",
       "revId": "9f8762cc0475b95af8e734390ae94bc0870be255",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09e64716_297bb47d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 403
+      },
+      "writtenOn": "2025-09-25T12:38:22Z",
+      "side": 1,
+      "message": "will also clear the FTBFS https://review.rdoproject.org/r/c/openstack/manila-distgit/+/57621",
+      "revId": "9f8762cc0475b95af8e734390ae94bc0870be255",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
