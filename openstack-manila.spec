@@ -34,6 +34,7 @@ Source10:         openstack-%{service}-api.service
 Source11:         openstack-%{service}-scheduler.service
 Source12:         openstack-%{service}-share.service
 Source13:         openstack-%{service}-data.service
+Source14:         %{service}-wsgi
 
 Source20:         %{service}-sudoers
 # Required for tarball sources verification
@@ -208,6 +209,9 @@ install -p -D -m 644 etc/%{service}/rootwrap.d/* %{buildroot}%{_datarootdir}/%{s
 
 # Remove duplicate config files under /usr/etc/
 rm -rf %{buildroot}%{_prefix}/etc
+
+# Install the cinder-wsgi compatibility file
+install -m 755 %{SOURCE14} %{buildroot}%{_bindir}/%{service}-wsgi
 
 %pre -n python3-%{service}
 getent group %{service} >/dev/null || groupadd -r %{service}
