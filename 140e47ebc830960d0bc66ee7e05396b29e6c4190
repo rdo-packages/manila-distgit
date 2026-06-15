@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9639ce6a_50c8aa1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 775
+      },
+      "writtenOn": "2026-06-15T13:11:08Z",
+      "side": 1,
+      "message": "Likely a c\u0026p thingy if I understand it right, otherwise LGTM! Thanks Miguel",
+      "revId": "140e47ebc830960d0bc66ee7e05396b29e6c4190",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bbebc9b_da5b4a4f",
+        "filename": "openstack-manila.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 775
+      },
+      "writtenOn": "2026-06-15T13:11:08Z",
+      "side": 1,
+      "message": "manila?",
+      "range": {
+        "startLine": 326,
+        "startChar": 14,
+        "endLine": 326,
+        "endChar": 20
+      },
+      "revId": "140e47ebc830960d0bc66ee7e05396b29e6c4190",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
