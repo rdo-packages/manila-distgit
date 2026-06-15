@@ -210,7 +210,7 @@ install -p -D -m 644 etc/%{service}/rootwrap.d/* %{buildroot}%{_datarootdir}/%{s
 # Remove duplicate config files under /usr/etc/
 rm -rf %{buildroot}%{_prefix}/etc
 
-# Install the cinder-wsgi compatibility file
+# Install the manila-wsgi compatibility file
 install -m 755 %{SOURCE14} %{buildroot}%{_bindir}/%{service}-wsgi
 
 %pre -n python3-%{service}
