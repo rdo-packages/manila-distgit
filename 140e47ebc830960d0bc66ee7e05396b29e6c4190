@@ -111,6 +111,30 @@
       },
       "revId": "140e47ebc830960d0bc66ee7e05396b29e6c4190",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8833aed7_2204de29",
+        "filename": "openstack-manila.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 527
+      },
+      "writtenOn": "2026-06-15T14:42:19Z",
+      "side": 1,
+      "message": "+1, ty for flaggig the fix.. would be nice to get it in",
+      "parentUuid": "ae70c583_f09f9897",
+      "range": {
+        "startLine": 326,
+        "startChar": 14,
+        "endLine": 326,
+        "endChar": 20
+      },
+      "revId": "140e47ebc830960d0bc66ee7e05396b29e6c4190",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
