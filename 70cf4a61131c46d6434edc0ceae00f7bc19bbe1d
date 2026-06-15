@@ -1,0 +1,11 @@
+Workflow+1: Lon Hohberger <lon@metamorphism.com>
+Code-Review+1: Carlos Eduardo <ces.eduardo98@gmail.com>
+Code-Review+2: Lon Hohberger <lon@metamorphism.com>
+Code-Review+1: Goutham Pacha Ravi <gouthampravi@gmail.com>
+Code-Review+1: Francesco Pantano <fpantano@redhat.com>
+Verified+2: Zuul CI <zuul@review.rdoproject.org>
+Submitted-by: Zuul CI <zuul@review.rdoproject.org>
+Submitted-at: Mon, 15 Jun 2026 14:55:25 +0000
+Reviewed-on: https://review.rdoproject.org/r/c/openstack/manila-distgit/+/58925
+Project: openstack/manila-distgit
+Branch: refs/heads/antelope-rdo
