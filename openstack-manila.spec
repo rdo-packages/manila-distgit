@@ -111,7 +111,11 @@ Requires:         python3-novaclient >= 17.2.1
 Requires:         python3-oslo-concurrency >= 4.3.0
 Requires:         python3-oslo-config >= 2:8.3.2
 Requires:         python3-oslo-context >= 3.1.1
+%if 0%{?rhosp} == 1
+Requires:         python3-oslo-db17
+%else
 Requires:         python3-oslo-db >= 8.4.0
+%endif
 Requires:         python3-oslo-i18n >= 5.0.1
 Requires:         python3-oslo-log >= 4.4.0
 Requires:         python3-oslo-messaging >= 14.1.0
@@ -139,12 +143,19 @@ Requires:         python3-tenacity >= 6.3.1
 Requires:         python3-sqlalchemy-utils >= 0.37.8
 Requires:         python3-castellan >= 3.7.0
 Requires:         python3-defusedxml >= 0.7.1
+BuildRequires:    python3-sqlalchemy-utils >= 0.37.8
+BuildRequires:    python3-castellan >= 3.7.0
+BuildRequires:    python3-defusedxml >= 0.7.1
 %endif
 
 # Config file generation dependencies
 BuildRequires:    python3-oslo-config >= 2:8.3.2
 BuildRequires:    python3-oslo-concurrency >= 3.25.0
+%if 0%{?rhosp} == 1
+BuildRequires:    python3-oslo-db17
+%else
 BuildRequires:    python3-oslo-db >= 4.27.0
+%endif
 BuildRequires:    python3-oslo-messaging >= 5.29.0
 BuildRequires:    python3-oslo-middleware
 BuildRequires:    python3-oslo-policy >= 1.30.0
